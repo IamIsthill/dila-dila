@@ -1,0 +1,17 @@
+{% load static %}
+<div class="flex justify-between items-center py-4 bg-verdigris-200 px-4">
+  <!-- Logo and Title (Enclosed in a Link) -->
+  <a href="{% url 'home' %}" class="flex items-center space-x-2">
+    <img src="{% static 'images/favicon.ico' %}" alt="Logo" class="h-12" />
+    <h1 class="text-xl font-bold text-white">Health Records Management System</h1>
+  </a>
+
+  <!-- Navigation Links -->
+  <div class="flex items-center space-x-6">
+    <a href="{% url 'home' %}" class="flex items-center text-white text-lg hover:text-gray-300 hover:bg-verdigris-300 hover:rounded-full transition-all duration-300 ease-in-out px-3 py-2"><i class="fas fa-home mr-1"></i> Home</a>
+    <a href="{% url 'patient-list' %}" class="flex items-center text-white text-lg hover:text-gray-300 hover:bg-verdigris-300 hover:rounded-full transition-all duration-300 ease-in-out px-3 py-2"><i class="fas fa-user-friends mr-1"></i> Patients</a>
+    <a href="{% url 'request-list' %}" class="flex items-center text-white text-lg hover:text-gray-300 hover:bg-verdigris-300 hover:rounded-full transition-all duration-300 ease-in-out px-3 py-2"><i class="fas fa-prescription-bottle-alt mr-1"></i> Medicine Requests</a>
+    <a href="{% url 'report' %}" class="flex items-center text-white text-lg hover:text-gray-300 hover:bg-verdigris-300 hover:rounded-full transition-all duration-300 ease-in-out px-3 py-2"><i class="fas fa-chart-bar mr-1"></i>Reports</a>
+    <a href="{% url 'logout' %}" class="flex items-center text-white text-lg hover:text-gray-300 hover:bg-verdigris-300 hover:rounded-full transition-all duration-300 ease-in-out px-3 py-2">Logout <i class="fas fa-sign-out-alt ml-1"></i></a>
+  </div>
+</div>

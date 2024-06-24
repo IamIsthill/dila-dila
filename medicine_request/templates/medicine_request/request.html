@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block main %}
+  <div class="max-w-md mx-auto mt-8 p-6 bg-white shadow-md rounded-lg">
+    <div class="flex items-center justify-between mb-4">
+      <h1 class="text-2xl font-bold">Medicine Request</h1>
+      <div class="flex gap-3">
+        <a href="{% url 'update-request' medreq.id %}" class="flex items-center justify-center w-10 h-10 bg-gray-300 text-gray-700 rounded-full shadow-sm hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"><i class="fas fa-edit"></i></a>
+        <a href="{% url 'delete-request' medreq.id %}" class="flex items-center justify-center w-10 h-10 bg-red-500 text-white rounded-full shadow-sm hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"><i class="fas fa-trash-alt"></i></a>
+      </div>
+    </div>
+
+    <p class="text-gray-700">
+      <span class="font-semibold">Patient:</span> {{ medreq.requester }}
+    </p>
+    <p class="text-gray-700">
+      <span class="font-semibold">Request Medicine:</span> {{ medreq.medicine }}
+    </p>
+    <p class="text-gray-700">
+      <span class="font-semibold">Quantity:</span> {{ medreq.quantity }}
+    </p>
+    <p class="text-gray-700">
+      <span class="font-semibold">Status:</span>
+      {% if medreq.date_fulfilled is None %}
+        <span class="text-red-500">Unfulfilled</span>
+      {% else %}
+        <span class="text-green-500">Fulfilled</span>
+      {% endif %}
+    </p>
+    <div class="mt-4 space-y-2">
+      <a href="{% url 'request-toggler' medreq.id %}" class="block bg-blue-500 text-white px-4 py-2 rounded-lg shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-center">
+        Mark as{% if medreq.date_fulfilled is None %}
+          Fulfilled
+        {% else %}
+          Unfulfilled
+        {% endif %}
+      </a>
+
+      <a href="{% url 'request-list' %}" class="block bg-gray-500 text-white px-4 py-2 rounded-lg shadow-sm hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 text-center">Go Back</a>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,178 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Health Records Report</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        background-color: rgb(218 255 239);
+      }
+      header {
+        color: white;
+        padding: 10px 0;
+        text-align: center;
+      }
+      main {
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+        background-color: white;
+      }
+      h1,
+      h2 {
+        color: #333;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+      .text-center {
+        text-align: center;
+      }
+      .px-6 {
+        padding-left: 6px;
+        padding-right: 6px;
+      }
+      .py-4 {
+        padding-top: 4px;
+        padding-bottom: 4px;
+      }
+      .whitespace-nowrap {
+        white-space: nowrap;
+      }
+      .align-middle {
+        vertical-align: middle;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Health Records Report</h1>
+    </header>
+    <main>
+      <div>
+        <h2 class="text-center">Summary</h2>
+        <table>
+          <tr>
+            <td colspan="2" class="text-center">Patients</td>
+          </tr>
+          <tr>
+            <td>Patient Count</td>
+            <td>{{ patient_count }}</td>
+          </tr>
+          <tr>
+            <td colspan="2" class="text-center">Requests</td>
+          </tr>
+          <tr>
+            <td>Request(s) Received</td>
+            <td>{{ request_count }}</td>
+          </tr>
+          <tr>
+            <td>Fulfilled Request(s)</td>
+            <td>{{ fulfilled_count }}</td>
+          </tr>
+          <tr>
+            <td>Unfulfilled Request(s)</td>
+            <td>{{ unfulfilled_count }}</td>
+          </tr>
+          <tr>
+            <td colspan="2" class="text-center">Medicines</td>
+          </tr>
+          <tr>
+            <td>Released Medicines</td>
+            <td>{{ quantity }}</td>
+          </tr>
+        </table>
+      </div>
+      <div>
+        <h2 class="text-center">Patient List</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Date of Birth</th>
+              <th>Address</th>
+              <th>Contact Details</th>
+              <th>Added</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% if patients %}
+              {% for item in patients %}
+                <tr>
+                  <td>{{ item.first_name }}</td>
+                  <td>{{ item.last_name }}</td>
+                  <td>{{ item.DOB }}</td>
+                  <td>{{ item.address }}</td>
+                  <td>{{ item.contact }}</td>
+                  <td>{{ item.added }}</td>
+                </tr>
+              {% endfor %}
+            {% else %}
+              <tr>
+                <td colspan="6" class="text-center">No patients fetched.</td>
+              </tr>
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h2 class="text-center">Medicine Records</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Requester</th>
+              <th>Medicine</th>
+              <th>Quantity</th>
+              <th>Date Requested</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% if requests %}
+              {% for item in requests %}
+                <tr>
+                  <td>{{ item.requester }}</td>
+                  <td>{{ item.medicine }}</td>
+                  <td>{{ item.quantity }}</td>
+                  <td>{{ item.date_requested|date:'F j, Y' }}</td>
+                  <td>
+                    {% if item.date_fulfilled is None %}
+                      <span>Unfulfilled</span>
+                    {% else %}
+                      <span>Fulfilled</span>
+                    {% endif %}
+                  </td>
+                </tr>
+              {% endfor %}
+            {% else %}
+              <tr>
+                <td colspan="5" class="text-center">No requests fetched.</td>
+              </tr>
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </body>
+</html>

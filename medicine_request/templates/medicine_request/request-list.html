@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block main %}
+  <div class="max-w-4xl mx-auto mt-8">
+    <h1 class="text-2xl font-bold mb-4">Request List</h1>
+    <form action="" method="GET" class="mb-4">
+      <input type="text" name="search" placeholder="Search medicine request.." class="w-full px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+    </form>
+    <div class="flex justify-between mb-4">
+      <a href="{% url 'add-request' %}" class="bg-teal-500 text-white px-4 py-2 rounded-lg shadow-sm hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2">New Request</a>
+      <div class="flex space-x-2">
+        <form action="" method="POST" class="inline-block">
+          {% csrf_token %}
+          <input type="hidden" name="condition" value="Fulfilled" />
+          <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-lg shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">Fulfilled</button>
+        </form>
+        <form action="" method="POST" class="inline-block">
+          {% csrf_token %}
+          <input type="hidden" name="condition" value="Unfulfilled" />
+          <button type="submit" class="bg-yellow-500 text-white px-4 py-2 rounded-lg shadow-sm hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2">Unfulfilled</button>
+        </form>
+      </div>
+    </div>
+    <div class="overflow-x-auto">
+      <table class="min-w-full bg-white border border-gray-200 divide-y divide-gray-200">
+        <thead>
+          <tr class="bg-gray-50">
+            <th class="px-6 py-3 text-center align-middle text-xs font-medium text-gray-500 uppercase tracking-wider">Requester</th>
+            <th class="px-6 py-3 text-center align-middle text-xs font-medium text-gray-500 uppercase tracking-wider">Medicine</th>
+            <th class="px-6 py-3 text-center align-middle text-xs font-medium text-gray-500 uppercase tracking-wider">Quantity</th>
+            <th class="px-6 py-3 text-center align-middle text-xs font-medium text-gray-500 uppercase tracking-wider">Date Requested</th>
+            <th class="px-6 py-3 text-center align-middle text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+          </tr>
+        </thead>
+
+        <tbody class="bg-white divide-y divide-gray-200">
+          {% if items %}
+            {% for item in items %}
+              <tr>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <a href="{% url 'request' item.id %}" class="text-blue-500 hover:underline">{{ item.requester }}</a>
+                </td>
+                <td class="px-6 py-4 whitespace-nowrap text-center align-middle">{{ item.medicine }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-center align-middle">{{ item.quantity }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-center align-middle">{{ item.date_requested|date:'F j, Y' }}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-center align-middle">
+                  {% if item.date_fulfilled is None %}
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">Unfulfilled</span>
+                  {% else %}
+                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Fulfilled</span>
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          {% else %}
+            <tr>
+              <td colspan="5" class="px-6 py-4 whitespace-nowrap text-center align-middle">No data fetched.</td>
+            </tr>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+    {% if items %}
+      {% include 'paginate.html' %}
+    {% endif %}
+  </div>
+{% endblock %}

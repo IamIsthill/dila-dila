@@ -1,0 +1,131 @@
+[{"model": "admin.logentry", "pk": 1, "fields": {"action_time": "2024-06-23T04:50:41.812Z", "user": 1, "content_type": 7, "object_id": "1", "object_repr": "asd asd", "action_flag": 1, "change_message": "[{\"added\": {}}]"}}, {"model": "admin.logentry", "pk": 2, "fields": {"action_time": "2024-06-23T13:58:05.980Z", "user": 1, "content_type": 8, "object_id": "5", "object_repr": "Charles Aerol Bercasio - Mga mangga", "action_flag": 2, "change_message": "[{\"changed\": {\"fields\": [\"Date fulfilled\"]}}]"}}, {"model": "auth.permission", "pk": 1, "fields": {"name": "Can add log entry", "content_type": 1, "codename": "add_logentry"}}, {"model": "auth.permission", "pk": 2, "fields": {"name": "Can change log entry", "content_type": 1, "codename": "change_logentry"}}, {"model": "auth.permission", "pk": 3, "fields": {"name": "Can delete log entry", "content_type": 1, "codename": "delete_logentry"}}, {"model": "auth.permission", "pk": 4, "fields": {"name": "Can view log entry", "content_type": 1, "codename": "view_logentry"}}, {"model": "auth.permission", "pk": 5, "fields": {"name": "Can add permission", "content_type": 2, "codename": "add_permission"}}, {"model": "auth.permission", "pk": 6, "fields": {"name": "Can change permission", "content_type": 2, "codename": "change_permission"}}, {"model": "auth.permission", "pk": 7, "fields": {"name": "Can delete permission", "content_type": 2, "codename": "delete_permission"}}, {"model": "auth.permission", "pk": 8, "fields": {"name": "Can view permission", "content_type": 2, "codename": "view_permission"}}, {"model": "auth.permission", "pk": 9, "fields": {"name": "Can add group", "content_type": 3, "codename": "add_group"}}, {"model": "auth.permission", "pk": 10, "fields": {"name": "Can change group", "content_type": 3, "codename": "change_group"}}, {"model": "auth.permission", "pk": 11, "fields": {"name": "Can delete group", "content_type": 3, "codename": "delete_group"}}, {"model": "auth.permission", "pk": 12, "fields": {"name": "Can view group", "content_type": 3, "codename": "view_group"}}, {"model": "auth.permission", "pk": 13, "fields": {"name": "Can add content type", "content_type": 4, "codename": "add_contenttype"}}, {"model": "auth.permission", "pk": 14, "fields": {"name": "Can change content type", "content_type": 4, "codename": "change_contenttype"}}, {"model": "auth.permission", "pk": 15, "fields": {"name": "Can delete content type", "content_type": 4, "codename": "delete_contenttype"}}, {"model": "auth.permission", "pk": 16, "fields": {"name": "Can view content type", "content_type": 4, "codename": "view_contenttype"}}, {"model": "auth.permission", "pk": 17, "fields": {"name": "Can add session", "content_type": 5, "codename": "add_session"}}, {"model": "auth.permission", "pk": 18, "fields": {"name": "Can change session", "content_type": 5, "codename": "change_session"}}, {"model": "auth.permission", "pk": 19, "fields": {"name": "Can delete session", "content_type": 5, "codename": "delete_session"}}, {"model": "auth.permission", "pk": 20, "fields": {"name": "Can view session", "content_type": 5, "codename": "view_session"}}, {"model": "auth.permission", "pk": 21, "fields": {"name": "Can add user", "content_type": 6, "codename": "add_user"}}, {"model": "auth.permission", "pk": 22, "fields": {"name": "Can change user", "content_type": 6, "codename": "change_user"}}, {"model": "auth.permission", "pk": 23, "fields": {"name": "Can delete user", "content_type": 6, "codename": "delete_user"}}, {"model": "auth.permission", "pk": 24, "fields": {"name": "Can view user", "content_type": 6, "codename": "view_user"}}, {"model": "auth.permission", "pk": 25, "fields": {"name": "Can add patient", "content_type": 7, "codename": "add_patient"}}, {"model": "auth.permission", "pk": 26, "fields": {"name": "Can change patient", "content_type": 7, "codename": "change_patient"}}, {"model": "auth.permission", "pk": 27, "fields": {"name": "Can delete patient", "content_type": 7, "codename": "delete_patient"}}, {"model": "auth.permission", "pk": 28, "fields": {"name": "Can view patient", "content_type": 7, "codename": "view_patient"}}, {"model": "auth.permission", "pk": 29, "fields": {"name": "Can add request", "content_type": 8, "codename": "add_request"}}, {"model": "auth.permission", "pk": 30, "fields": {"name": "Can change request", "content_type": 8, "codename": "change_request"}}, {"model": "auth.permission", "pk": 31, "fields": {"name": "Can delete request", "content_type": 8, "codename": "delete_request"}}, {"model": "auth.permission", "pk": 32, "fields": {"name": "Can view request", "content_type": 8, "codename": "view_request"}}, {"model": "contenttypes.contenttype", "pk": 1, "fields": {"app_label": "admin", "model": "logentry"}}, {"model": "contenttypes.contenttype", "pk": 2, "fields": {"app_label": "auth", "model": "permission"}}, {"model": "contenttypes.contenttype", "pk": 3, "fields": {"app_label": "auth", "model": "group"}}, {"model": "contenttypes.contenttype", "pk": 4, "fields": {"app_label": "contenttypes", "model": "contenttype"}}, {"model": "contenttypes.contenttype", "pk": 5, "fields": {"app_label": "sessions", "model": "session"}}, {"model": "contenttypes.contenttype", "pk": 6, "fields": {"app_label": "users", "model": "user"}}, {"model": "contenttypes.contenttype", "pk": 7, "fields": {"app_label": "patients", "model": "patient"}}, {"model": "contenttypes.contenttype", "pk": 8, "fields": {"app_label": "medicine_request", "model": "request"}}, {"model": "sessions.session", "pk": "rt74zyunwe5nk90x72raq0k612y1sy3t", "fields": {"session_data": ".eJxVjDsOwjAQBe_iGlnx36Gk5wzW2ruLA8iR4qRC3B0ipYD2zcx7iQTbWtPWaUkTirNQ4vS7ZSgPajvAO7TbLMvc1mXKclfkQbu8zkjPy-H-HVTo9Vvb7DUzO6UdxJFYYyHFISsfSvDegLfMFOOgjckR0EVSmsxobUEHA4r3B_QyOD4:1sLf7b:-TsZZw2BY0efgJP-Evr7R-0g29f4xG5teE981VX64Hc", "expire_date": "2024-07-08T08:32:19.577Z"}}, {"model": "users.user", "pk": 1, "fields": {"password": "pbkdf2_sha256$720000$mE3STjSKO4FdCYjNhyPw65$QMn1H5Df8ScGy+BHuDIrQiQIJSH7Y7VHJ+Hl+5hnC9g=", "last_login": "2024-06-24T08:32:19.574Z", "is_superuser": true, "first_name": "", "last_name": "", "is_staff": true, "is_active": true, "date_joined": "2024-06-23T04:49:20.583Z", "name": null, "email": "bercasiocharles14@gmail.com", "username": null, "groups": [], "user_permissions": []}}, {"model": "patients.patient", "pk": 1, "fields": {"first_name": "asd", "last_name": "asd", "DOB": "2024-06-23", "address": "sd", "contact": "asd", "added": "2024-06-23T04:50:41.809Z"}}, {"model": "patients.patient", "pk": 2, "fields": {"first_name": "Charles Aerol", "last_name": "Bercasio", "DOB": "2024-02-07", "address": "24 Joven Street", "contact": "123", "added": "2024-06-23T04:51:37.607Z"}}, {"model": "patients.patient", "pk": 3, "fields": {"first_name": "Jajaja", "last_name": "asasa", "DOB": "1999-06-16", "address": "Niggaland", "contact": "123", "added": "2024-06-23T16:18:51.216Z"}}, {"model": "patients.patient", "pk": 4, "fields": {"first_name": "Miya", "last_name": "Juana", "DOB": "2011-03-04", "address": "Babo Pangulo", "contact": "Alien", "added": "2024-06-24T07:08:24.448Z"}},{
+    "model": "patients.patient",
+    "pk": 5,
+    "fields": {
+      "first_name": "John",
+      "last_name": "Doe",
+      "DOB": "1985-09-12",
+      "address": "123 Main Street",
+      "contact": "555-1234",
+      "added": "2024-06-24T09:15:00.000Z"
+    }
+  },
+  {
+    "model": "patients.patient",
+    "pk": 6,
+    "fields": {
+      "first_name": "Jane",
+      "last_name": "Smith",
+      "DOB": "1990-04-25",
+      "address": "456 Elm Avenue",
+      "contact": "555-5678",
+      "added": "2024-06-24T10:30:00.000Z"
+    }
+  },
+  {
+    "model": "patients.patient",
+    "pk": 7,
+    "fields": {
+      "first_name": "Michael",
+      "last_name": "Johnson",
+      "DOB": "1976-11-08",
+      "address": "789 Oak Drive",
+      "contact": "555-9876",
+      "added": "2024-06-24T11:45:00.000Z"
+    }
+  },
+    {
+      "model": "patients.patient",
+      "pk": 8,
+      "fields": {
+        "first_name": "Emily",
+        "last_name": "Johnson",
+        "DOB": "1992-08-15",
+        "address": "567 Pine Lane",
+        "contact": "555-2468",
+        "added": "2024-06-24T13:00:00.000Z"
+      }
+    },
+    {
+      "model": "patients.patient",
+      "pk": 9,
+      "fields": {
+        "first_name": "Daniel",
+        "last_name": "Brown",
+        "DOB": "1980-03-20",
+        "address": "890 Cedar Street",
+        "contact": "555-3691",
+        "added": "2024-06-24T14:15:00.000Z"
+      }
+    },
+    {
+      "model": "patients.patient",
+      "pk": 10,
+      "fields": {
+        "first_name": "Sophia",
+        "last_name": "Garcia",
+        "DOB": "2000-12-05",
+        "address": "123 Elm Street",
+        "contact": "555-8024",
+        "added": "2024-06-24T15:30:00.000Z"
+      }
+    }
+  
+, {"model": "medicine_request.request", "pk": 1, "fields": {"requester": 2, "date_requested": "2024-06-23T14:55:59.412Z", "date_fulfilled": "2024-06-23T14:55:59.411Z", "medicine": "ddfdgd", "quantity": 12}}, {"model": "medicine_request.request", "pk": 2, "fields": {"requester": 2, "date_requested": "2024-06-23T16:43:15.776Z", "date_fulfilled": "2024-06-23T16:43:15.775Z", "medicine": "ddfdgd", "quantity": 1}}, {"model": "medicine_request.request", "pk": 3, "fields": {"requester": 1, "date_requested": "2024-06-23T15:57:22.410Z", "date_fulfilled": "2024-06-23T15:57:22.410Z", "medicine": "23", "quantity": 234}}, {"model": "medicine_request.request", "pk": 4, "fields": {"requester": 2, "date_requested": "2024-06-23T13:38:48.928Z", "date_fulfilled": null, "medicine": "asd", "quantity": 123}}, {"model": "medicine_request.request", "pk": 6, "fields": {"requester": 3, "date_requested": "2024-06-23T18:48:21.239Z", "date_fulfilled": null, "medicine": "paracetamol", "quantity": 6}}, {"model": "medicine_request.request", "pk": 7, "fields": {"requester": 4, "date_requested": "2024-06-24T08:19:34.059Z", "date_fulfilled": "2024-06-24T08:19:34.056Z", "medicine": "Bkoks", "quantity": 1}},
+    {
+      "model": "medicine_request.request",
+      "pk": 8,
+      "fields": {
+        "requester": 5,
+        "date_requested": "2024-06-24T09:30:00.000Z",
+        "date_fulfilled": null,
+        "medicine": "Ibuprofen",
+        "quantity": 20
+      }
+    },
+    {
+      "model": "medicine_request.request",
+      "pk": 9,
+      "fields": {
+        "requester": 6,
+        "date_requested": "2024-06-24T10:45:00.000Z",
+        "date_fulfilled": null,
+        "medicine": "Amoxicillin",
+        "quantity": 15
+      }
+    },
+    {
+      "model": "medicine_request.request",
+      "pk": 10,
+      "fields": {
+        "requester": 7,
+        "date_requested": "2024-06-24T12:00:00.000Z",
+        "date_fulfilled": null,
+        "medicine": "Omeprazole",
+        "quantity": 30
+      }
+    },
+    {
+      "model": "medicine_request.request",
+      "pk": 11,
+      "fields": {
+        "requester": 8,
+        "date_requested": "2024-06-24T13:15:00.000Z",
+        "date_fulfilled": null,
+        "medicine": "Ciprofloxacin",
+        "quantity": 10
+      }
+    },
+    {
+      "model": "medicine_request.request",
+      "pk": 12,
+      "fields": {
+        "requester": 9,
+        "date_requested": "2024-06-24T14:30:00.000Z",
+        "date_fulfilled": null,
+        "medicine": "Metformin",
+        "quantity": 25
+      }
+    }
+  
+  ]

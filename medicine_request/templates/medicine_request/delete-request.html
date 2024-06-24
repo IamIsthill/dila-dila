@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block main %}
+  <div class="max-w-md mx-auto mt-8 p-6 bg-white shadow-md rounded-lg">
+    <form action="" method="POST" class="space-y-6">
+      {% csrf_token %}
+      <h2 class="text-xl font-bold text-gray-800">Confirm to delete request, '{{ medreq.medicine }}-{{ medreq.quantity }}'?</h2>
+      <div class="flex justify-between">
+        <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-lg shadow-sm hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">Delete</button>
+        <a href="{% url 'request-list' %}" class="bg-yellow-500 text-black px-4 py-2 rounded-lg shadow-sm hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2">Cancel</a>
+      </div>
+    </form>
+  </div>
+{% endblock %}

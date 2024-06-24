@@ -1,0 +1,6 @@
+tailwind = npx tailwindcss -i ./static/css/input.css -o ./static/css/output.css --watch
+python manage.py makemigrations
+python manage.py migrate
+python manage.py loaddata db.json
+python manage.py dumpdata > db.json
+python manage.py createsuperuser --email bercasiocharles14@gmail.com
