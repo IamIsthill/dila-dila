@@ -135,3 +135,6 @@ def generate_report(request):
         return HttpResponse('We had some errors <pre>' + html + '</pre>')
     
     return response
+
+def landing(request):
+    return render(request, 'base/landing.html')

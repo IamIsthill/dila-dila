@@ -4,10 +4,10 @@
   <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-10">
     <!-- Card 1: Total Patients -->
     <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-      <div class="px-4 py-6">
-        <h2 class="text-xl font-bold mb-4">
+      <div class="px-4 py-6 flex flex-col items-center">
+        <h2 class="text-xl font-bold mb-4 flex items-center">
+          <i class="fas fa-users mr-2"></i>
           Total Patients
-          <i class="fas fa-users mr-2 pl-4"></i>
         </h2>
         <h3 class="text-xl font-bold mb-4"><span class="patient-count">Total Patient(s): {{ patient_count }}</span></h3>
       </div>
@@ -20,16 +20,16 @@
 
     <!-- Card 2: Total Requests -->
     <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-      <div class="px-4 py-6">
-        <h2 class="text-xl font-bold mb-4">
+      <div class="px-4 py-6 flex flex-col items-center">
+        <h2 class="text-xl font-bold mb-4 flex items-center">
           Total Requests Made
-          <i class="fas fa-file-medical mr-2 pl-3"></i>
+          <i class="fas fa-file-medical ml-3"></i>
         </h2>
-        <h3 class="text-xl font-bold mb-4">Total Request(s) Made: <span class="total">{{ request_count }}</span></h3>
-        <h4 class="font-bold mb-2">Fulfilled: <span class="fulfilled">{{ fulfilled_count }}</span></h4>
-        <h4 class="font-bold mb-2">Unfulfilled: <span class="unfulfilled">{{ unfulfilled_count }}</span></h4>
+        <h3 class="text-xl font-bold mb-4 text-center">Total Request(s) Made: <span class="total">{{ request_count }}</span></h3>
+        <h4 class="font-bold mb-2 text-center">Fulfilled: <span class="fulfilled">{{ fulfilled_count }}</span></h4>
+        <h4 class="font-bold mb-2 text-center">Unfulfilled: <span class="unfulfilled">{{ unfulfilled_count }}</span></h4>
       </div>
-      <div class="flex justify-center space-x-2 mt-4 mb-2 ml-2">
+      <div class="flex justify-center space-x-2 mt-4 mb-2">
         <button class="all-request-btn bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded transition duration-300">All</button>
         <button class="monthly-request-btn bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded transition duration-300">Monthly</button>
         <button class="today-request-btn bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded transition duration-300">Today</button>
@@ -38,12 +38,12 @@
 
     <!-- Card 3: Released Medicines -->
     <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-      <div class="px-4 py-6">
-        <h2 class="text-xl font-bold mb-4">
+      <div class="px-4 py-6 flex flex-col items-center">
+        <h2 class="text-xl font-bold mb-4 flex items-center">
           Released Medicines
-          <i class="fas fa-pills pl-3 mr-2"></i>
+          <i class="fas fa-pills pl-3 ml-2"></i>
         </h2>
-        <h3 class="text-xl font-bold mb-4">Released Medicine(s): <span class="quantity">{{ quantity }}</span></h3>
+        <h3 class="text-xl font-bold mb-4 text-center">Released Medicine(s): <span class="quantity">{{ quantity }}</span></h3>
       </div>
       <div class="flex justify-center space-x-2 mt-20 mb-2">
         <button class="all-medicine-btn bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded transition duration-300">All</button>
@@ -55,13 +55,13 @@
 
   <!-- Actions: Add New Patient and Add New Request -->
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
-    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden p-12">
       <div class="px-4 py-6 flex items-center justify-center">
         <a href="{% url 'add-patient' %}" class="text-blue-500 hover:text-blue-700 flex items-center"><i class="fas fa-user-plus text-4xl mr-2"></i> Add New Patient</a>
       </div>
     </div>
 
-    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden p-12">
       <div class="px-4 py-6 flex items-center justify-center">
         <a href="{% url 'add-request' %}" class="text-blue-500 hover:text-blue-700 flex items-center"><i class="fas fa-prescription-bottle-alt text-4xl mr-2"></i> Add New Request</a>
       </div>
@@ -120,8 +120,8 @@
     }
     function dataHandler(data) {
       document.querySelector('.patient-count').innerHTML = `
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      Total Patient(s): ${data.patient_count}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      `
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  Total Patient(s): ${data.patient_count}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  `
     }
     
     function requestHandler(data) {
