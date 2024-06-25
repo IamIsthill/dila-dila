@@ -64,6 +64,7 @@ def delete_patient_view(request, pk):
     context = {'patient': patient}
     return render(request, 'patients/delete_patient.html', context)
 
+@login_required(login_url='login')
 def patient(request, pk):
     patient = Patient.objects.get(id=pk)
     requests = Request.objects.filter(requester = patient)

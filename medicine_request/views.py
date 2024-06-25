@@ -42,6 +42,7 @@ def request_view(request, pk):
     context = {'medreq': medreq}
     return render(request, 'medicine_request/request.html', context)
 
+@login_required(login_url='login')
 def request_toggle(request, pk):
     medreq = Request.objects.get(id=pk)
     if medreq.date_fulfilled is None:
@@ -51,6 +52,7 @@ def request_toggle(request, pk):
     medreq.save()
     return redirect('request', medreq.id)
 
+@login_required(login_url='login')
 def update_request_view(request, pk):
     medreq = Request.objects.get(id=pk)
     if request.method == 'POST':
@@ -67,6 +69,7 @@ def update_request_view(request, pk):
     context={'medreq':medreq}
     return render(request, 'medicine_request/update-request.html', context)
 
+@login_required(login_url='login')
 def delete_request_view(request, pk):
     medreq = Request.objects.get(id=pk)
     if request.method == 'POST':
@@ -76,6 +79,7 @@ def delete_request_view(request, pk):
     context = {'medreq':medreq}
     return render(request, 'medicine_request/delete-request.html', context)
 
+@login_required(login_url='login')
 def request_list_view(request):
     requests = Request.objects.all()
     q = request.GET.get('search') if request.GET.get('search') != None else ''
