@@ -6,19 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HRMS</title>
     {% include 'header.html' %}
+    <style>
+      body::-webkit-scrollbar {
+        display: none;
+      }
+    </style>
   </head>
-  <body class="bg-mint-green min-h-screen">
-    {% if request.user.is_authenticated %}
-      {% include 'navbar.html' %}
-    {% endif %}
-    <div class="container mx-auto px-4 py-8">
-      {% block messages %}
+  <body class="bg-mint-green min-h-screen pb-0 flex flex-col">
+    <div class="flex-grow">
+      {% if request.user.is_authenticated %}
+        {% include 'navbar.html' %}
+      {% endif %}
+      <div class="container mx-auto px-4 py-8">
+        {% block messages %}
 
-      {% endblock %}
+        {% endblock %}
 
-      {% block main %}
+        {% block main %}
 
-      {% endblock %}
+        {% endblock %}
+      </div>
     </div>
+    {% include 'footer.html' %}
+    <script></script>
   </body>
 </html>
