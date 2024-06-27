@@ -16,5 +16,6 @@ urlpatterns = [
     path('api/get-all-medicine', views.all_medicine_count, name="get-all-medicine"),
     path('api/get-monthly-medicine', views.monthly_medicine_count, name="get-monthly-medicine"),
     path('api/get-today-medicine', views.today_medicine_count, name="get-today-medicine"),
-    path('reports/', views.generate_report, name="report")
+    path('reports/', views.generate_report, name="report"),
+    path('error/', views.error404)
 ]

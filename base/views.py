@@ -138,3 +138,7 @@ def generate_report(request):
 
 def landing(request):
     return render(request, 'base/landing.html')
+
+
+def error404(request):
+    return render(request, '404.html')
