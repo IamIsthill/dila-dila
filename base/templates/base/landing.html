@@ -279,9 +279,11 @@
         // Remove 'active' class from all navigation links
         document.querySelectorAll('.nav-link').forEach((item) => {
           item.classList.remove('active', 'text-black', 'bg-white')
+          item.classList.add('text-white')
         })
       
         // Add 'active' class to the clicked link
+        link.classList.remove('text-white')
         link.classList.add('active', 'text-black', 'bg-white')
       
         // Scroll to the corresponding section

@@ -21,6 +21,8 @@ def home(request):
         date_fulfilled__isnull=True
     ).count()
     quantity = Request.objects.filter(date_fulfilled__isnull=False).aggregate(quantity=Sum('quantity'))['quantity']
+    if quantity == None:
+        quantity = 0
     context = {'patient_count' : patient_count, 'request_count': request_count, 'fulfilled_count': fulfilled_count, 'unfulfilled_count': unfulfilled_count, 'quantity':quantity, }
     return render(request, 'base/index.html', context)
 
