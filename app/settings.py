@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-7_&xaz^@5w92#^v8@7-=fz7k)0d0eqgeelxqqpm$$495#3ua&-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '127.0.0.1:8000', 'localhost:8000']
+ALLOWED_HOSTS = ['*']
 
 
 
@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
+   
     "base.apps.BaseConfig",
     "users.apps.UsersConfig",
     "patients.apps.PatientsConfig",
@@ -47,13 +49,13 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # for serving static files in production
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    'whitenoise.middleware.WhiteNoiseMiddleware', # serving the static files in production
 ]
 
 ROOT_URLCONF = "app.urls"
@@ -77,6 +79,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "app.wsgi.application"
+ASGI_APPLICATION = "app.asgi.application"
 
 
 # Database
@@ -93,10 +96,19 @@ WSGI_APPLICATION = "app.wsgi.application"
 import environ
 
 env = environ.Env()
-environ.Env.read_env()
+environ.Env.read_env(env_file='.env')
 import dj_database_url
+
+
 DATABASES = {
-    "default": dj_database_url.parse(env('DATABASE_URL'))
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "postgres",
+        "HOST": env("DATABASE_HOST"),
+        "PORT": 6543,
+        "USER": env("DATABASE_USER"),
+        "PASSWORD": env("DATABASE_PASSWORD"),
+    }
 }
 
 
