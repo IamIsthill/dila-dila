@@ -1,0 +1,7 @@
+venv
+.gitignore
+commands.txt
+data.json
+db.json
+db.sqlite3
+node_modules
