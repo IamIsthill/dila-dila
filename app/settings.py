@@ -175,3 +175,9 @@ EMAIL_HOST_PASSWORD = env('EMAIL_PASS')
 # AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY")
 
 # AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")
+
+if DEBUG:
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    ALLOWED_HOSTS = ['local-hrms.duckdns.org', 'http://local-hrms.duckdns.org', 'https://local-hrms.duckdns.org']
+
