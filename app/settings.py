@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "users.apps.UsersConfig",
     "patients.apps.PatientsConfig",
     "medicine_request.apps.MedicineRequestConfig",
+    "records.apps.RecordsConfig",
 ]
 
 MIDDLEWARE = [
@@ -181,3 +182,6 @@ if DEBUG:
     CSRF_COOKIE_SECURE = True
     ALLOWED_HOSTS = ['local-hrms.duckdns.org', 'http://local-hrms.duckdns.org', 'https://local-hrms.duckdns.org']
 
+# New config
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_SAVE_EVERY_REQUEST = True
