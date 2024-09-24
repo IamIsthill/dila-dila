@@ -23,36 +23,64 @@
     </div>
 
     <div class="w-full max-w-4xl">
-      <h1 class="text-2xl font-bold mb-4">Request History</h1>
+      <div class="flex justify-between items-center mb-6">
+        <div>
+          <h1 class="text-2xl font-bold">Visit History</h1>
+        </div>
+        <div class="space-x-2">
+          <a href="{% url 'add-request' %}?patient={{ patient.id }}" class="bg-teal-500 text-white px-4 py-2 rounded-lg shadow-sm hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2">New Request</a>
+          <a href="{% url 'create_checkup' %}?patient={{ patient.id }}" class="bg-blue-500 hover:bg-blue-700 text-white rounded-lg shadow-sm font-bold py-2 px-4 rounded-md">New Checkup</a>
+          <a href="{% url 'create_checkup' %}?patient={{ patient.id }}" class="bg-blue-500 hover:bg-blue-700 text-white rounded-lg shadow-sm font-bold py-2 px-4 rounded-md">Print Data</a>
+        </div>
+      </div>
+
       <div class="space-y-4">
         {% if items %}
-          {% for req in items %}
-            <a href="{% url 'request' req.id %}" class="block p-4 border rounded-lg bg-white shadow-sm hover:bg-gray-100 transition duration-300">
-              <div class="flex justify-between items-center">
-                <div>
-                  <p class="text-gray-600">
-                    <span class="font-semibold">Request Date:</span> {{ req.date_requested }}
-                  </p>
-                  <p class="text-gray-600">
-                    <span class="font-semibold">Medicine Requested:</span> {{ req.medicine }}
-                  </p>
-                  <p class="text-gray-600">
-                    <span class="font-semibold">Quantity:</span> {{ req.quantity }}
-                  </p>
-                </div>
-                <div class="text-right">
-                  <p class="text-sm">
-                    <span class="font-semibold">Status:</span>
-                    {% if req.date_fulfilled %}
-                      <span class="text-green-500">Fulfilled</span>
-                    {% else %}
-                      <span class="text-red-500">Unfulfilled</span>
+          {% for item in items %}
+            <div class="block p-6 border rounded-lg bg-white shadow-md hover:bg-gray-50 transition duration-300">
+              <div class="space-y-4">
+                {% if item.check_up %}
+                  <div class="border-b pb-4">
+                    <p class="text-gray-700">
+                      <span class="font-bold">Date Visited:</span> {{ item.check_up.date_added }}
+                    </p>
+                    <p class="text-gray-700">
+                      <span class="font-bold">Check-up Details:</span> {{ item.check_up.checkup_details }}
+                    </p>
+                  </div>
+                {% endif %}
+
+                <div class="grid grid-cols-2 gap-4 items-center">
+                  <div>
+                    {% if not item.check_up %}
+                      <p class="text-gray-700">
+                        <span class="font-bold">Request Date:</span> {{ item.date_requested }}
+                      </p>
                     {% endif %}
-                  </p>
+                    <p class="text-gray-700">
+                      <span class="font-bold">Medicine Requested:</span> {{ item.medicine }}
+                    </p>
+                    <p class="text-gray-700">
+                      <span class="font-bold">Quantity:</span> {{ item.quantity }}
+                    </p>
+                  </div>
+
+                  <div class="text-right">
+                    <p class="text-sm">
+                      <span class="font-bold">Status:</span>
+                      {% if item.date_fulfilled %}
+                        <span class="text-green-500 font-semibold">Fulfilled</span>
+                      {% else %}
+                        <span class="text-red-500 font-semibold">Unfulfilled</span>
+                      {% endif %}
+                    </p>
+                    <a href="{% url 'request' item.id %}" class="text-blue-500 hover:underline text-sm">View Request</a>
+                  </div>
                 </div>
               </div>
-            </a>
+            </div>
           {% endfor %}
+
           {% include 'paginate.html' %}
         {% else %}
           <div class="block p-4 border rounded-lg bg-white shadow-sm hover:bg-gray-100 transition duration-300">

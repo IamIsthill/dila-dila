@@ -4,6 +4,7 @@ from django.contrib import messages
 from .forms import PatientForm
 from .models import Patient
 from medicine_request.models import Request
+from records.models import Records
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 

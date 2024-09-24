@@ -35,4 +35,24 @@
       <a href="{% url 'request-list' %}" class="w-1/2 px-4 py-2 bg-gray-300 text-gray-700 rounded-md shadow-sm hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100 text-center">Cancel</a>
     </div>
   </form>
+  <script>
+    get_patient_from_url()
+    
+    //if there is a patient in the url, set them as initial value
+    function get_patient_from_url() {
+      const url = new URL(window.location.href)
+      const patient_id = url.searchParams.get('patient')
+      if (patient_id) {
+        const select_element = document.querySelector('select[name="requester"]')
+        const options = select_element.children
+        if (options.length > 1) {
+          for (const option of options) {
+            if (parseInt(option.value) == parseInt(patient_id)) {
+              select_element.value = patient_id
+            }
+          }
+        }
+      }
+    }
+  </script>
 {% endblock %}

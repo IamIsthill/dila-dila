@@ -36,4 +36,24 @@
       </div>
     </div>
   </form>
+  <script>
+    get_patient_from_url()
+    
+    //if there is a patient in the url, set them as initial value
+    function get_patient_from_url() {
+      const url = new URL(window.location.href)
+      const patient_id = url.searchParams.get('patient')
+      if (patient_id) {
+        const select_element = document.querySelector('select[name="patient_id"]')
+        const options = select_element.children
+        if (options.length > 1) {
+          for (const option of options) {
+            if (parseInt(option.value) == parseInt(patient_id)) {
+              select_element.value = patient_id
+            }
+          }
+        }
+      }
+    }
+  </script>
 {% endblock %}
