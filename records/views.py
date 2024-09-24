@@ -6,6 +6,7 @@ from django.db.models import Q
 
 from .serializers import RecordSerializer
 from .models import Records
+from patients.models import Patient
 
 
 
@@ -40,6 +41,24 @@ def check_up_home(request):
     })
 
     return render(request, 'records/checkup.html', context)
+
+@login_required(login_url='login')
+def post_update_checkup(request, pk):
+    try:
+        record = Records.objects.get(id=int(pk))
+    except:
+        messages.error(request, "Patient does not exist.")
+    
+    if request.method.lower() == 'post':
+        if record:
+            record.checkup_details = request.POST.get('checkup')
+            record.save()
+            messages.success(request, 'Successfully updated checkup details')
+            return redirect('check_up_home')
+
+    context = {'record':record}
+    return render(request, 'records/edit_checkup.html', context)
+        
 
 
 
