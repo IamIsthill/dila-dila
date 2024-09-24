@@ -22,3 +22,7 @@ migrate:
 .PHONY: super
 super:
 	python manage.py createsuperuser --email bercasiocharles14@gmail.com
+
+.PHONY: delete-migrations
+delete-migrations:
+	find . -path "*/migrations/*.py" -not -name "__init__.py" -not -path "*/.venv/*" -delete

@@ -1,9 +1,3 @@
-FROM node:18-alpine AS node-base
-
-COPY [ "package-lock.json", "package.json", "./"]
-
-RUN npm install
-
 FROM python:3.12-slim-bullseye AS python-base
 
 COPY requirements.txt ./

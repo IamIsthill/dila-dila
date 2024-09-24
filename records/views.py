@@ -66,7 +66,8 @@ def post_update_checkup(request, pk):
 def post_create_checkup(request):
     try:
         patients = Patient.objects.all()
-    except:
+    except Exception as e:
+        logger.error(f"{str(e)}")
         messages.error(request, "Problem fetching data. Please try again.")
         return redirect('check_up_home')
     
@@ -100,7 +101,34 @@ def post_create_checkup(request):
 
     context = {'patients':patients}
     return render(request, 'records/add_checkup.html', context)
-    
+
+
+@login_required(login_url='login')
+def post_delete_checkup(request, pk):
+    try:
+        checkup = Records.objects.get(id=int(pk))
+    except Exception as e:
+        logger.error(f"{e}")
+        messages.warning(request, 'Failed to find checkup record.')
+        return redirect('check_up_home')
+
+    if request.method.lower() == 'post':
+        try:
+            checkup.delete()
+        except Exception as e:
+            logger.error(f"{str(e)}")
+            messages.error(request, 'Failed to delete check up record.')
+            return redirect('check_up_home')
+        
+        messages.success(request, 'Successfully deleted checkup record. ')
+        return redirect('check_up_home')
+
+
+        
+    context = {'checkup':checkup}
+    return render(request, 'records/delete_checkup.html', context)
+
+
 
 
         

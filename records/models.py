@@ -1,6 +1,6 @@
 from django.db import models
 from patients.models import Patient
-from users.models import User
+import pytz
 
 # Create your models here.
 class Records(models.Model):
@@ -10,5 +10,6 @@ class Records(models.Model):
 
     def __str__(self):
         return f"{self.patient.first_name} {self.patient.last_name}"
+
 
 
