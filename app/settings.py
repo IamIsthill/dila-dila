@@ -13,6 +13,11 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 import os
 
+import environ
+
+env = environ.Env()
+environ.Env.read_env(env_file='.env')
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -24,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-7_&xaz^@5w92#^v8@7-=fz7k)0d0eqgeelxqqpm$$495#3ua&-"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = env.bool("LOCAL_DEV", False)
 
 ALLOWED_HOSTS = ['*']
 
@@ -83,21 +88,7 @@ WSGI_APPLICATION = "app.wsgi.application"
 ASGI_APPLICATION = "app.asgi.application"
 
 
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
-
 # Render Postgre DB Live
-import environ
-
-env = environ.Env()
-environ.Env.read_env(env_file='.env')
 import dj_database_url
 
 
@@ -177,7 +168,7 @@ EMAIL_HOST_PASSWORD = env('EMAIL_PASS')
 
 # AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")
 
-if DEBUG:
+if not DEBUG:
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
     ALLOWED_HOSTS = ['local-hrms.duckdns.org', 'http://local-hrms.duckdns.org', 'https://local-hrms.duckdns.org']
@@ -185,3 +176,12 @@ if DEBUG:
 # New config
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_SAVE_EVERY_REQUEST = True
+
+if env.bool("LOCAL_DEV", False):
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
+

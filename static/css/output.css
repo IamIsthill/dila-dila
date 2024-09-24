@@ -824,10 +824,6 @@ video {
   margin-left: 0.5rem;
 }
 
-.ml-20 {
-  margin-left: 5rem;
-}
-
 .ml-3 {
   margin-left: 0.75rem;
 }
@@ -1631,12 +1627,6 @@ video {
   margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
-.space-x-6 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(1.5rem * var(--tw-space-x-reverse));
-  margin-left: calc(1.5rem * calc(1 - var(--tw-space-x-reverse)));
-}
-
 .space-y-2 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));
@@ -1653,24 +1643,6 @@ video {
   --tw-space-y-reverse: 0;
   margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
-}
-
-.space-x-20 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(5rem * var(--tw-space-x-reverse));
-  margin-left: calc(5rem * calc(1 - var(--tw-space-x-reverse)));
-}
-
-.space-x-36 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(9rem * var(--tw-space-x-reverse));
-  margin-left: calc(9rem * calc(1 - var(--tw-space-x-reverse)));
-}
-
-.space-x-80 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(20rem * var(--tw-space-x-reverse));
-  margin-left: calc(20rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
 .space-y-reverse > :not([hidden]) ~ :not([hidden]) {
@@ -2504,8 +2476,8 @@ video {
   padding-bottom: 0.75rem;
 }
 
-.pl-20 {
-  padding-left: 5rem;
+.pl-2 {
+  padding-left: 0.5rem;
 }
 
 .pl-3 {
@@ -2538,10 +2510,6 @@ video {
 
 .pt-3 {
   padding-top: 0.75rem;
-}
-
-.pl-2 {
-  padding-left: 0.5rem;
 }
 
 .text-left {
@@ -3543,10 +3511,6 @@ video {
 }
 
 @media (min-width: 640px) {
-  .sm\:collapse {
-    visibility: collapse;
-  }
-
   .sm\:text-sm {
     font-size: 0.875rem;
     line-height: 1.25rem;
@@ -3558,10 +3522,6 @@ video {
 }
 
 @media (min-width: 768px) {
-  .md\:collapse {
-    visibility: collapse;
-  }
-
   .md\:my-24 {
     margin-top: 6rem;
     margin-bottom: 6rem;

@@ -6,6 +6,7 @@ urlpatterns = [
     path('home/', views.home, name='home'),
     path('', include('users.urls')),
     path('patients/', include('patients.urls')),
+    path('checkup/', include('records.urls')), 
     path('medicine-requests/', include('medicine_request.urls')),
     path('api/get-all-patients', views.all_patient_count, name="get-all-patients"),
     path('api/get-monthly-patients', views.monthly_patient_count, name="get-monthly-patients"),
