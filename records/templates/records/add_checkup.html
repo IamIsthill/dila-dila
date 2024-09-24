@@ -1,16 +1,34 @@
 {% extends 'base.html' %}
+
 {% block main %}
-  <form action="" method="POST" class="max-w-md mx-auto p-6 bg-white shadow-md rounded-lg">
+  <form action="" id="form" method="POST" class="max-w-md mx-auto p-6 bg-white shadow-md rounded-lg">
     {% csrf_token %}
     <div class="mb-4">
-      <label for="id_last_name" class="block text-sm font-medium text-gray-700">Patient Name:</label>
-      <p class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">{{ record.patient.first_name }} {{ record.patient.last_name }}</p>
+      <label for="id_requester" class="block text-sm font-medium text-gray-700">Patient:</label>
+      <select name="patient_id" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+        {% for patient in patients %}
+          <option value="{{ patient.id }}">{{ patient }}</option>
+        {% endfor %}
+      </select>
     </div>
     <div class="mb-4">
       <label for="id_DOB" class="block text-sm font-medium text-gray-700">Check up Details:</label>
-      <textarea type="textarea" name="checkup" required id="id_DOB" class="h-24 mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">{{ record.checkup_details }}</textarea>
+      <textarea type="textarea" name="checkup_details" required id="id_DOB" class="h-24 mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">{{ record.checkup_details }}</textarea>
     </div>
-    <button type="submit" class="w-full px-4 py-2 bg-blue-500 text-white rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100">Edit</button>
-    <a href="{% url 'check_up_home' %}" class="block mt-2 w-full px-4 py-2 bg-gray-300 text-gray-800 rounded-md shadow-sm hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:ring-offset-gray-100 text-center">Cancel</a>
+
+    <div class="mb-4">
+      <label for="id_medicine" class="block text-sm font-medium text-gray-700">Issue Medicine:</label>
+      <input type="text" name="medicine" maxlength="200" required id="id_medicine" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
+    </div>
+
+    <div class="mb-4">
+      <label for="id_quantity" class="block text-sm font-medium text-gray-700">Quantity:</label>
+      <input type="number" name="quantity" required id="id_quantity" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
+    </div>
+
+    <div class="flex justify-between gap-1">
+      <button type="submit" class="w-1/2 px-4 py-2 bg-blue-500 text-white rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100">Add Checkup</button>
+      <a href="{% url 'check_up_home' %}" class="w-1/2 px-4 py-2 bg-gray-300 text-gray-700 rounded-md shadow-sm hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100 text-center">Cancel</a>
+    </div>
   </form>
 {% endblock %}

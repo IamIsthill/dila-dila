@@ -35,20 +35,4 @@
       <a href="{% url 'request-list' %}" class="w-1/2 px-4 py-2 bg-gray-300 text-gray-700 rounded-md shadow-sm hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100 text-center">Cancel</a>
     </div>
   </form>
-
-  <script>
-    {% comment %} document.addEventListener('DOMContentLoaded', function () {
-      let inputRequester = document.getElementById('id_requester')
-    
-      // Event listener for input changes
-      inputRequester.addEventListener('input', function () {
-        let selectedOption = document.querySelector(`#patient-list option[value="${inputRequester.value}"]`)
-    
-        if (selectedOption) {
-          let patientId = selectedOption.getAttribute('data-id')
-          document.getElementById('pk').value = patientId
-        }
-      })
-    }) {% endcomment %}
-  </script>
 {% endblock %}

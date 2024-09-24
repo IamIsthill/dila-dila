@@ -3,12 +3,15 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib import messages
 from django.db.models import Q
+import logging
 
 from .serializers import RecordSerializer, PatientSerializer
 from .models import Records
 from patients.models import Patient
+from medicine_request.models import Request
 
 
+logger = logging.getLogger('__name__')
 
 # Create your views here.
 @login_required(login_url='login')
@@ -67,12 +70,6 @@ def post_create_checkup(request):
         messages.error(request, "Problem fetching data. Please try again.")
         return redirect('check_up_home')
     
-    patient_data = []
-    if patients:
-        for patient in patients:
-            data = PatientSerializer(patient)
-            patient_data.append({data.data})
-    
     if request.method.lower() == 'post':
         try:
             patient = Patient.objects.get(id=int(request.POST.get('patient_id')))
@@ -81,16 +78,28 @@ def post_create_checkup(request):
             return redirect('check_up_home')
         
         try:
-            Records.objects.create(
+            checkup = Records.objects.create(
                 patient = patient,
                 checkup_details = request.POST.get('checkup_details')
             )
-        except:
+
+            med_req = Request.objects.create(
+                requester = patient,
+                medicine = request.POST.get('medicine'),
+                quantity = request.POST.get('quantity'),
+                check_up = checkup
+            )
+
+        except Exception as e:
+            logger.error(f"{e}")
             messages.error(request, "Failed to create new check up. Please try again.")
             return redirect('check_up_home')
         
         messages.success(request, "Successfully created new checkup")
         return redirect('check_up_home')
+
+    context = {'patients':patients}
+    return render(request, 'records/add_checkup.html', context)
     
 
 
