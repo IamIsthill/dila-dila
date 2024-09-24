@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Records
+from patients.models import Patient
 
 class RecordSerializer(serializers.ModelSerializer):
     patient_first_name = serializers.CharField(
@@ -10,4 +11,10 @@ class RecordSerializer(serializers.ModelSerializer):
     )
     class Meta:
         model = Records
+        fields = '__all__'
+
+
+class PatientSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Patient
         fields = '__all__'
