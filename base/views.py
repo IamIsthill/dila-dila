@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from patients.models import Patient
 from medicine_request.models import Request
 from django.contrib.auth.decorators import login_required
@@ -8,6 +8,9 @@ from .serializers import PatientSerializer
 from datetime import datetime
 from django.db.models import Sum
 from django.contrib import messages
+import logging
+
+logger = logging.getLogger('__name__')
 
 @login_required(login_url='login')
 def home(request):
@@ -110,6 +113,7 @@ from django.http import HttpResponse
 from django.template.loader import get_template
 from xhtml2pdf import pisa
 
+@login_required(login_url='login')
 def generate_report(request):
     patients = Patient.objects.all()
     requests = Request.objects.all()
@@ -137,6 +141,64 @@ def generate_report(request):
         return HttpResponse('We had some errors <pre>' + html + '</pre>')
     
     return response
+
+@login_required(login_url='login')
+def patient_report(request, pk):
+    try:
+        patient = Patient.objects.get(id=int(pk))
+    except Exception as e:
+        logger.error(f"{str(e)}")
+        messages.error(request, "No patient found.")
+        return redirect('patient-list')
+    
+    try:
+        requests = Request.objects.filter(
+            requester = patient
+        )
+    except Exception as e:
+        logger.error(f"{str(e)}")
+        messages.error(request, "Failed to fetch data.")
+        return redirect('patient-list')
+    
+    patient_data = {
+        'unfulfilled': 0,
+        'fulfilled': 0,
+        'fulfilled_med': 0,
+        'unfulfilled_med': 0,
+        'request_count' : requests.count() or 0,
+        'checkups' : 0
+    }
+
+    if requests:
+        for item in requests:
+            if item.date_fulfilled:
+                patient_data['fulfilled'] = patient_data['fulfilled'] + 1
+                patient_data['fulfilled_med'] = patient_data['fulfilled_med'] + item.quantity
+            else:
+                patient_data['unfulfilled'] = patient_data['unfulfilled'] + 1
+                patient_data['unfulfilled_med'] = patient_data['unfulfilled_med'] + item.quantity
+            if item.check_up:
+                patient_data['checkups'] = patient_data['checkups'] + 1
+    
+    context = {
+        'patient_data' : patient_data,
+        'requests' : requests,
+        'patient' : patient
+    }
+
+    html_string = get_template('base/patient_report.html')
+    html = html_string.render(context)
+
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'inline; filename="patient_report.pdf"'
+    pisa_status = pisa.CreatePDF(html, dest=response)
+    
+    if pisa_status.err:
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    
+    return response
+
+
 
 def landing(request):
     return render(request, 'base/landing.html')

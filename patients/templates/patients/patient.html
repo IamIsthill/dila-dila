@@ -30,7 +30,7 @@
         <div class="space-x-2">
           <a href="{% url 'add-request' %}?patient={{ patient.id }}" class="bg-teal-500 text-white px-4 py-2 rounded-lg shadow-sm hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2">New Request</a>
           <a href="{% url 'create_checkup' %}?patient={{ patient.id }}" class="bg-blue-500 hover:bg-blue-700 text-white rounded-lg shadow-sm font-bold py-2 px-4 rounded-md">New Checkup</a>
-          <a href="{% url 'create_checkup' %}?patient={{ patient.id }}" class="bg-blue-500 hover:bg-blue-700 text-white rounded-lg shadow-sm font-bold py-2 px-4 rounded-md">Print Data</a>
+          <a href="{% url 'patient_report' patient.id %}" class="bg-blue-500 hover:bg-blue-700 text-white rounded-lg shadow-sm font-bold py-2 px-4 rounded-md">Print Data</a>
         </div>
       </div>
 
@@ -40,13 +40,18 @@
             <div class="block p-6 border rounded-lg bg-white shadow-md hover:bg-gray-50 transition duration-300">
               <div class="space-y-4">
                 {% if item.check_up %}
-                  <div class="border-b pb-4">
-                    <p class="text-gray-700">
-                      <span class="font-bold">Date Visited:</span> {{ item.check_up.date_added }}
-                    </p>
-                    <p class="text-gray-700">
-                      <span class="font-bold">Check-up Details:</span> {{ item.check_up.checkup_details }}
-                    </p>
+                  <div class="grid grid-cols-2 gap-4 items-center">
+                    <div class="border-b pb-4">
+                      <p class="text-gray-700">
+                        <span class="font-bold">Date Visited:</span> {{ item.check_up.date_added }}
+                      </p>
+                      <p class="text-gray-700">
+                        <span class="font-bold">Check-up Details:</span> {{ item.check_up.checkup_details }}
+                      </p>
+                    </div>
+                    <div class="text-right">
+                      <a href="{% url 'update_checkup' item.check_up.id %}" class="text-blue-500 hover:underline text-sm">Edit Checkup</a>
+                    </div>
                   </div>
                 {% endif %}
 

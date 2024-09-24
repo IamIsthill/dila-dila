@@ -18,5 +18,6 @@ urlpatterns = [
     path('api/get-monthly-medicine', views.monthly_medicine_count, name="get-monthly-medicine"),
     path('api/get-today-medicine', views.today_medicine_count, name="get-today-medicine"),
     path('reports/', views.generate_report, name="report"),
+    path("reports/patient/<int:pk>/", views.patient_report, name="patient_report"),
     path('error/', views.error404)
 ]
