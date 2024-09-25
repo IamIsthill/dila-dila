@@ -171,7 +171,12 @@ EMAIL_HOST_PASSWORD = env('EMAIL_PASS')
 if not DEBUG:
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
-    ALLOWED_HOSTS = ['local-hrms.duckdns.org', 'http://local-hrms.duckdns.org', 'https://local-hrms.duckdns.org']
+    ALLOWED_HOSTS = [
+        'local-hrms.duckdns.org', 
+        'http://local-hrms.duckdns.org', 
+        'https://local-hrms.duckdns.org',
+        '34.19.30.0',
+    ]
     CSRF_TRUSTED_ORIGINS = [
         'https://local-hrms.duckdns.org',
         'local-hrms.duckdns.org',
