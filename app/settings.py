@@ -141,8 +141,7 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 STATICFILES_DIRS = [
-  BASE_DIR / 'static',
-  BASE_DIR / 'node_modules'
+  BASE_DIR / 'static'
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -169,7 +168,7 @@ EMAIL_HOST_PASSWORD = env('EMAIL_PASS')
 
 # AWS_SECRET_ACCESS_KEY = env("AWS_SECRET_ACCESS_KEY")
 
-if not DEBUG:
+if DEBUG:
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
     ALLOWED_HOSTS = ['local-hrms.duckdns.org', 'http://local-hrms.duckdns.org', 'https://local-hrms.duckdns.org']
