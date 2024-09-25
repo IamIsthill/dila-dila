@@ -174,8 +174,8 @@ EMAIL_HOST_PASSWORD = env('EMAIL_PASS')
 #     ALLOWED_HOSTS = ['local-hrms.duckdns.org', 'http://local-hrms.duckdns.org', 'https://local-hrms.duckdns.org']
 
 # New config
-SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-SESSION_SAVE_EVERY_REQUEST = True
+# SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+# SESSION_SAVE_EVERY_REQUEST = True
 
 if env.bool("LOCAL_DEV", False):
     DATABASES = {
