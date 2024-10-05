@@ -175,7 +175,7 @@ if not DEBUG:
         'local-hrms.duckdns.org', 
         'http://local-hrms.duckdns.org', 
         'https://local-hrms.duckdns.org',
-        '34.19.30.0',
+        '35.197.90.138',
     ]
     CSRF_TRUSTED_ORIGINS = [
         'https://local-hrms.duckdns.org',
