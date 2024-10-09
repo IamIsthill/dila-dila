@@ -179,7 +179,6 @@ if not DEBUG:
     ]
     CSRF_TRUSTED_ORIGINS = [
         'https://local-hrms.duckdns.org',
-        'local-hrms.duckdns.org',
         'http://local-hrms.duckdns.org'
     ]
 
