@@ -54,7 +54,7 @@
   </div>
 
   <!-- Actions: Add New Patient and Add New Request -->
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
     <div class="bg-white shadow-lg rounded-lg overflow-hidden p-12">
       <div class="px-4 py-6 flex items-center justify-center">
         <a href="{% url 'add-patient' %}" class="text-blue-500 hover:text-blue-700 flex items-center"><i class="fas fa-user-plus text-4xl mr-2"></i> Add New Patient</a>
@@ -64,6 +64,11 @@
     <div class="bg-white shadow-lg rounded-lg overflow-hidden p-12">
       <div class="px-4 py-6 flex items-center justify-center">
         <a href="{% url 'add-request' %}" class="text-blue-500 hover:text-blue-700 flex items-center"><i class="fas fa-prescription-bottle-alt text-4xl mr-2"></i> Add New Request</a>
+      </div>
+    </div>
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden p-12">
+      <div class="px-4 py-6 flex items-center justify-center">
+        <a href="{% url 'create_checkup' %}" class="text-blue-500 hover:text-blue-700 flex items-center"><i class="fas fa-stethoscope text-4xl mr-2"></i> Add New Checkup</a>
       </div>
     </div>
   </div>
@@ -120,8 +125,8 @@
     }
     function dataHandler(data) {
       document.querySelector('.patient-count').innerHTML = `
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  Total Patient(s): ${data.patient_count}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  `
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          Total Patient(s): ${data.patient_count}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          `
     }
     
     function requestHandler(data) {

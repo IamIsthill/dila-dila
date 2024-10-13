@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block main %}
+  <div class="max-w-md mx-auto mt-8 p-6 bg-white shadow-md rounded-lg">
+    <form action="" method="POST" class="space-y-6">
+      {% csrf_token %}
+      <div class="mb-4">
+        <h2 class="text-xl font-bold text-gray-800">Confirm to delete check up record of '{{ checkup.patient.first_name }} {{ checkup.patient.last_name }}'?</h2>
+      </div>
+      <div class="mb-4">
+        <div class="p-4 bg-gray-100 border border-gray-300 rounded-lg shadow-sm">
+          <p class="text-sm text-gray-600">{{ checkup.checkup_details }}</p>
+        </div>
+      </div>
+
+      <div class="flex justify-between gap-4">
+        <button type="submit" class="w-1/2 bg-red-500 text-white px-4 py-2 rounded-lg shadow-sm hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">Delete</button>
+        <a href="{% url 'check_up_home' %}" class="w-1/2 bg-paynes-gray-300 text-white px-4 py-2 rounded-lg shadow-sm hover:bg-paynes-gray-600 focus:outline-none focus:ring-2 focus:ring-paynes-gray-500 focus:ring-offset-2 text-center">Cancel</a>
+      </div>
+    </form>
+  </div>
+{% endblock %}

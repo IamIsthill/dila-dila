@@ -4,6 +4,7 @@ from django.contrib import messages
 from .forms import PatientForm
 from .models import Patient
 from medicine_request.models import Request
+from records.models import Records
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -19,6 +20,11 @@ def add_patient_view(request):
             return redirect('patient-list')
         else:
             messages.error(request, 'Error adding the patient')
+        referrer = request.META.get("HTTP_REFERER")
+        if referrer:
+            return redirect(referrer)
+        else:
+            return redirect('patient-list')
     return render(request, 'patients/add_patient.html')
 
 @login_required(login_url='login')

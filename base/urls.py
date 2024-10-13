@@ -6,6 +6,7 @@ urlpatterns = [
     path('home/', views.home, name='home'),
     path('', include('users.urls')),
     path('patients/', include('patients.urls')),
+    path('checkup/', include('records.urls')), 
     path('medicine-requests/', include('medicine_request.urls')),
     path('api/get-all-patients', views.all_patient_count, name="get-all-patients"),
     path('api/get-monthly-patients', views.monthly_patient_count, name="get-monthly-patients"),
@@ -17,5 +18,6 @@ urlpatterns = [
     path('api/get-monthly-medicine', views.monthly_medicine_count, name="get-monthly-medicine"),
     path('api/get-today-medicine', views.today_medicine_count, name="get-today-medicine"),
     path('reports/', views.generate_report, name="report"),
+    path("reports/patient/<int:pk>/", views.patient_report, name="patient_report"),
     path('error/', views.error404)
 ]

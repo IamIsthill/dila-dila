@@ -15,22 +15,17 @@ def add_request_view(request):
     form = RequestForm()
     if request.method == 'POST':
         try:
-            pk = request.POST.get('pk')
+            pk = request.POST.get('requester')
             if not pk:
                 raise ValueError("Patient ID (pk) is required.")
-            patient = get_object_or_404(Patient, id=pk)
-            patient_name = f'{patient.first_name} {patient.last_name}'
-            name = request.POST.get('requester')
-            if name and (name.lower() in patient_name.lower()):
-                med = Request.objects.create(
-                    requester=patient,
-                    medicine=request.POST.get('medicine'),
-                    quantity=request.POST.get('quantity')
-                )
-                messages.success(request, 'Request successfully added')
-                return redirect('request', med.id)
-            else:
-                messages.error(request, 'There is a problem with the requester name. Please check and try again.')
+            patient = get_object_or_404(Patient, id=int(pk))
+            med = Request.objects.create(
+                requester=patient,
+                medicine=request.POST.get('medicine'),
+                quantity=request.POST.get('quantity')
+            )
+            messages.success(request, 'Request successfully added')
+            return redirect('request', med.id)
         except (ValueError, Patient.DoesNotExist):
             messages.error(request, 'Patient not found or invalid request. Please ensure that the patient is already added.')
     context = {'patients': patients, 'form': form}
