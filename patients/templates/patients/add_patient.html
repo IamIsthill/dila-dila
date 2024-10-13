@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block main %}
-  <form action="" method="POST" class="max-w-md mx-auto p-6 bg-white shadow-md rounded-lg">
+  {% comment %} <form action="" method="POST" class="max-w-md mx-auto p-6 bg-white shadow-md rounded-lg">
     {% csrf_token %}
     <div class="mb-4">
       <label for="id_first_name" class="block text-sm font-medium text-gray-700">First Name:</label>
@@ -24,5 +24,343 @@
       <input type="text" name="contact" required id="id_contact" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" />
     </div>
     <button type="submit" class="w-full px-4 py-2 bg-paynes-gray-300 text-white rounded-md shadow-sm hover:bg-paynes-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100">Add Patient</button>
+  </form> {% endcomment %}
+  <form action="" method="POST" class="max-w-xl mx-auto p-6 bg-white shadow-md rounded-lg">
+    {% csrf_token %}
+
+    <!-- Personal Information -->
+    <h2 class="text-lg font-medium mb-4">Personal Information</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-1">
+      <div class="mb-4">
+        <label for="id_first_name" class="block text-sm font-medium text-gray-700">First Name:</label>
+        <input type="text" name="first_name" id="id_first_name" maxlength="100" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" required />
+      </div>
+
+      <div class="mb-4">
+        <label for="id_middle_name" class="block text-sm font-medium text-gray-700">Middle Name:</label>
+        <input type="text" name="middle_name" id="id_middle_name" maxlength="100" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" />
+      </div>
+
+      <div class="mb-4">
+        <label for="id_last_name" class="block text-sm font-medium text-gray-700">Last Name:</label>
+        <input type="text" name="last_name" id="id_last_name" maxlength="100" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" required />
+      </div>
+
+      <div class="mb-4">
+        <label for="id_suffix" class="block text-sm font-medium text-gray-700">Suffix:</label>
+        <input type="text" name="suffix" id="id_suffix" maxlength="20" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" />
+      </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-1">
+      <div class="mb-4">
+        <label for="id_sex" class="block text-sm font-medium text-gray-700">Sex:</label>
+        <select name="sex" id="id_sex" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="id_civil_status" class="block text-sm font-medium text-gray-700">Civil Status:</label>
+        <select name="civil_status" id="id_civil_status" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+          <option value="Single">Single</option>
+          <option value="Married">Married</option>
+          <option value="Annulled">Annulled</option>
+          <option value="Widow/er">Widow/er</option>
+          <option value="Separated">Separated</option>
+          <option value="Co-Habitation">Co-Habitation</option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="id_blood_type" class="block text-sm font-medium text-gray-700">Blood Type:</label>
+        <input type="text" name="blood_type" id="id_blood_type" class="mt-1 block w-full px-3 py-1.5 border border-gray-300 rounded-md shadow-sm" required list="blood_list" />
+        <datalist id="blood_list">
+          <option value="A-"></option>
+          <option value="A+"></option>
+          <option value="B-"></option>
+          <option value="B+"></option>
+          <option value="AB-"></option>
+          <option value="AB+"></option>
+          <option value="O-"></option>
+          <option value="O+"></option>
+        </datalist>
+      </div>
+    </div>
+    <div class="mb-4 maiden_name_div hidden">
+      <label for="id_maiden_name" class="block text-sm font-medium text-gray-700">Maiden Name:</label>
+      <input type="text" name="maiden_name" id="id_maiden_name" maxlength="100" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" />
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-1">
+      <div class="mb-4">
+        <label for="id_DOB" class="block text-sm font-medium text-gray-700">Date of Birth:</label>
+        <input type="date" name="DOB" id="id_DOB" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" required />
+      </div>
+
+      <div class="mb-4">
+        <label for="id_contact" class="block text-sm font-medium text-gray-700">Contact Number:</label>
+        <input type="text" name="contact" id="id_contact" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" required />
+      </div>
+    </div>
+    <div class="mb-4">
+      <label for="id_birth_place" class="block text-sm font-medium text-gray-700">Place of Birth:</label>
+      <input name="birth_place" id="id_birth_place" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" required />
+    </div>
+
+    <h2 class="text-lg font-medium mb-4">Family Information</h2>
+    <div class="mb-4">
+      <label for="id_address" class="block text-sm font-medium text-gray-700">Address:</label>
+      <textarea name="address" id="id_address" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" required></textarea>
+    </div>
+
+    <div class="mb-4">
+      <label for="id_mother_name" class="block text-sm font-medium text-gray-700">Mother's Name:</label>
+      <input type="text" name="mother_name" id="id_mother_name" maxlength="100" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" required />
+    </div>
+    <div class="mb-4">
+      <label for="id_spouse_name" class="block text-sm font-medium text-gray-700">Spouse's Name:</label>
+      <input type="text" name="spouse_name" id="id_spouse_name" maxlength="50" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" />
+    </div>
+    <div class="mb-4">
+      <label for="id_family_member" class="block text-sm font-medium text-gray-700">Family Member:</label>
+      <input type="text" name="family_member" id="id_family_member" maxlength="20" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" list="family" />
+      <datalist id="family">
+        <option value="Father"></option>
+        <option value="Mother"></option>
+        <option value="Son"></option>
+        <option value="Daughter"></option>
+      </datalist>
+    </div>
+
+    <!-- Socio-Economic Background -->
+    <h2 class="text-lg font-medium mb-4">Socio-Economic Background</h2>
+    <div class="mb-4">
+      <label for="id_education" class="block text-sm font-medium text-gray-700">Educational Attainment:</label>
+      <select type="text" name="education" id="id_education" maxlength="40" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+        <option value="No Formal Education">No Formal Education</option>
+        <option value="Elementary">Elementary</option>
+        <option value="High School">High School</option>
+        <option value="Vocational">Vocational</option>
+        <option value="College">College</option>
+        <option value="Post Graduate">Post Graduate</option>
+      </select>
+    </div>
+    <div class="mb-4">
+      <label for="id_employment_status" class="block text-sm font-medium text-gray-700">Employment Status:</label>
+      <select type="text" name="employment_status" id="id_employment_status" maxlength="20" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+        <option value="Student">Student</option>
+        <option value="Employed">Employed</option>
+        <option value="Retired">Retired</option>
+        <option value="Unknown">Unknown</option>
+        <option value="None/Unemployed">None/Unemployed</option>
+      </select>
+    </div>
+
+    <!-- Government and Health Coverage Information -->
+    <h2 class="text-lg font-medium mb-4">Additional Information</h2>
+
+    <div class="mb-4 flex justify-normal">
+      <label for="" class="text-sm font-medium text-gray-700">Patient member of DWSD NHTS?</label>
+      <div class="flex items-center ml-2">
+        <input type="radio" name="is_nhts" id="id_is_nhts_yes" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" checked />
+        <label for="id_is_nhts_yes" class="ml-2 text-sm font-medium text-gray-700">Yes</label>
+      </div>
+      <div class="flex items-center ml-4">
+        <input type="radio" name="is_nhts" id="id_is_nhts_no" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" />
+        <label for="id_is_nhts_no" class="ml-2 text-sm font-medium text-gray-700">No</label>
+      </div>
+    </div>
+    <div class="mb-4 facility_household_no_div">
+      <label for="" class="block text-sm font-medium text-gray-700">Facility Household Number:</label>
+      <input type="number" name="facility_household_no" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" required />
+    </div>
+    <div class="mb-4 flex justify-normal">
+      <label for="" class="text-sm font-medium text-gray-700">Patient beneficiary of 4Ps?</label>
+      <div class="flex items-center ml-2">
+        <input type="radio" name="is_4ps" id="id_is_4ps_yes" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" checked />
+        <label for="id_is_4ps_yes" class="ml-2 text-sm font-medium text-gray-700">Yes</label>
+      </div>
+      <div class="flex items-center ml-4">
+        <input type="radio" name="is_4ps" id="id_is_4ps_no" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" />
+        <label for="id_is_4ps_no" class="ml-2 text-sm font-medium text-gray-700">No</label>
+      </div>
+    </div>
+    <div class="mb-4 household_no_div">
+      <label for="id_household_no" class="block text-sm font-medium text-gray-700">Household Number:</label>
+      <input type="text" name="household_no" id="id_household_no" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" />
+    </div>
+
+    <!-- PhilHealth -->
+    <div class="mb-4 flex justify-normal">
+      <label for="" class="text-sm font-medium text-gray-700">Patient member of PhilHealth?</label>
+      <div class="flex items-center ml-2">
+        <input type="radio" name="is_philhealth" id="id_is_philhealth_yes" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" checked />
+        <label for="id_is_philhealth_yes" class="ml-2 text-sm font-medium text-gray-700">Yes</label>
+      </div>
+      <div class="flex items-center ml-4">
+        <input type="radio" name="is_philhealth" id="id_is_philhealth_no" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" />
+        <label for="id_is_philhealth_no" class="ml-2 text-sm font-medium text-gray-700">No</label>
+      </div>
+    </div>
+    <div class="mb-4 philhealth_div">
+      <label for="id_philhealth_no" class="block text-sm font-medium text-gray-700">PhilHealth Number:</label>
+      <input type="text" name="philhealth_no" id="id_philhealth_no" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" />
+    </div>
+    <div class="mb-4 philhealth_div">
+      <label for="id_member_type" class="block text-sm font-medium text-gray-700">Member Status Type:</label>
+      <select type="text" name="status_type" id="id_member_type" maxlength="50" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+        <option value="Member">Member</option>
+        <option value="Dependent">Dependent</option>
+      </select>
+    </div>
+    <div class="mb-4 philhealth_div member_category_div">
+      <label for="id_member_category" class="block text-sm font-medium text-gray-700">Member Category Type:</label>
+      <input type="text" name="member_category" id="id_member_category" maxlength="50" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" list="category_list" />
+      <datalist id="category_list">
+        <option value="FE - Private: "></option>
+        <option value="FE - Goverment: "></option>
+        <option value="IE: "></option>
+      </datalist>
+    </div>
+    <div class="mb-4 flex justify-normal">
+      <label for="" class="text-sm font-medium text-gray-700">Patient member of Primary Care Benefit(PCB)?</label>
+      <div class="flex items-center ml-2">
+        <input type="radio" name="is_pcb" id="id_is_pcb_yes" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" checked />
+        <label for="id_is_pcb_yes" class="ml-2 text-sm font-medium text-gray-700">Yes</label>
+      </div>
+      <div class="flex items-center ml-4">
+        <input type="radio" name="is_pcb" id="id_is_pcb_no" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" />
+        <label for="id_is_pcb_no" class="ml-2 text-sm font-medium text-gray-700">No</label>
+      </div>
+    </div>
+
+    <button type="submit" class="w-full px-4 py-2 bg-paynes-gray-300 text-white rounded-md shadow-sm hover:bg-paynes-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100">Add Patient</button>
   </form>
+  <script>
+    listen_dswd_nhts()
+    listen_4ps()
+    listen_philhealth_member()
+    listen_philhealth_status()
+    listen_sex()
+    
+    function listen_dswd_nhts() {
+      const isYes = document.getElementById('id_is_nhts_yes')
+      const isNo = document.getElementById('id_is_nhts_no')
+    
+      isYes.addEventListener('change', () => {
+        if (isYes.checked) {
+          const div = document.querySelector('.facility_household_no_div')
+          div.classList.remove('hidden')
+          div.classList.add('block')
+        }
+      })
+    
+      isNo.addEventListener('change', () => {
+        if (isNo.checked) {
+          const div = document.querySelector('.facility_household_no_div')
+          div.classList.remove('block')
+          div.classList.add('hidden')
+        }
+      })
+    }
+    
+    function listen_4ps() {
+      const isYes = document.getElementById('id_is_4ps_yes')
+      const isNo = document.getElementById('id_is_4ps_no')
+    
+      isYes.addEventListener('change', () => {
+        if (isYes.checked) {
+          const div = document.querySelector('.household_no_div')
+          div.classList.remove('hidden')
+          div.classList.add('block')
+        }
+      })
+    
+      isNo.addEventListener('change', () => {
+        if (isNo.checked) {
+          const div = document.querySelector('.household_no_div')
+          div.classList.remove('block')
+          div.classList.add('hidden')
+        }
+      })
+    }
+    
+    function listen_philhealth_member() {
+      const isYes = document.getElementById('id_is_philhealth_yes')
+      const isNo = document.getElementById('id_is_philhealth_no')
+    
+      isYes.addEventListener('change', () => {
+        if (isYes.checked) {
+          const divs = document.querySelectorAll('.philhealth_div')
+          for (const div of divs) {
+            div.classList.remove('hidden')
+            div.classList.add('block')
+          }
+        }
+        const select = document.getElementById('id_member_type')
+        if (select.value == 'Dependent') {
+          const div = document.querySelector('.member_category_div')
+          div.classList.add('hidden')
+          div.classList.remove('block')
+        } else {
+          const div = document.querySelector('.member_category_div')
+          div.classList.add('block')
+          div.classList.remove('hidden')
+        }
+      })
+    
+      isNo.addEventListener('change', () => {
+        if (isNo.checked) {
+          const divs = document.querySelectorAll('.philhealth_div')
+          for (const div of divs) {
+            div.classList.remove('block')
+            div.classList.add('hidden')
+          }
+        }
+        const select = document.getElementById('id_member_type')
+        if (select.value == 'Dependent') {
+          const div = document.querySelector('.member_category_div')
+          div.classList.add('hidden')
+          div.classList.remove('block')
+        } else {
+          const div = document.querySelector('.member_category_div')
+          div.classList.add('block')
+          div.classList.remove('hidden')
+        }
+      })
+    }
+    
+    function listen_philhealth_status() {
+      const select = document.getElementById('id_member_type')
+    
+      select.addEventListener('change', () => {
+        if (select.value == 'Dependent') {
+          const div = document.querySelector('.member_category_div')
+          div.classList.add('hidden')
+          div.classList.remove('block')
+        } else {
+          const div = document.querySelector('.member_category_div')
+          div.classList.add('block')
+          div.classList.remove('hidden')
+        }
+      })
+    }
+    
+    function listen_sex() {
+      const select = document.getElementById('id_sex')
+      const maiden_input = document.getElementById('id_maiden_name')
+    
+      select.addEventListener('change', () => {
+        if (select.value == 'Male') {
+          const div = document.querySelector('.maiden_name_div')
+          div.classList.add('hidden')
+          div.classList.remove('block')
+          maiden_input.removeAttribute('required')
+        } else {
+          const div = document.querySelector('.maiden_name_div')
+          div.classList.add('block')
+          div.classList.remove('hidden')
+          maiden_input.setAttribute('required', '')
+        }
+      })
+    }
+  </script>
 {% endblock %}
