@@ -6,7 +6,7 @@ from django.db.models import Q
 import logging
 
 from .serializers import RecordSerializer, PatientSerializer
-from .models import Records
+from .models import Records, Illness
 from patients.models import Patient
 from medicine_request.models import Request
 
@@ -48,6 +48,7 @@ def check_up_home(request):
 @login_required(login_url='login')
 def post_update_checkup(request, pk):
     try:
+        illness_list = Illness.objects.all()
         record = Records.objects.get(id=int(pk))
     except:
         messages.error(request, "Patient does not exist.")
@@ -59,13 +60,14 @@ def post_update_checkup(request, pk):
             messages.success(request, 'Successfully updated checkup details')
             return redirect('check_up_home')
 
-    context = {'record':record}
+    context = {'record':record, 'illness_list':illness_list}
     return render(request, 'records/edit_checkup.html', context)
 
 @login_required(login_url='login')
 def post_create_checkup(request):
     try:
         patients = Patient.objects.all()
+        illness_list = Illness.objects.all()
     except Exception as e:
         logger.error(f"{str(e)}")
         messages.error(request, "Problem fetching data. Please try again.")
@@ -79,9 +81,12 @@ def post_create_checkup(request):
             return redirect('check_up_home')
         
         try:
+            illness, created = Illness.objects.get_or_create(illness_name = request.POST.get('illness'))
+
             checkup = Records.objects.create(
                 patient = patient,
-                checkup_details = request.POST.get('checkup_details')
+                checkup_details = request.POST.get('checkup_details'),
+                illness = illness
             )
 
             med_req = Request.objects.create(
@@ -99,7 +104,7 @@ def post_create_checkup(request):
         messages.success(request, "Successfully created new checkup")
         return redirect('check_up_home')
 
-    context = {'patients':patients}
+    context = {'patients':patients, 'illness_list':illness_list}
     return render(request, 'records/add_checkup.html', context)
 
 

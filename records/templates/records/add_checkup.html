@@ -3,6 +3,7 @@
 {% block main %}
   <form action="" id="form" method="POST" class="max-w-md mx-auto p-6 bg-white shadow-md rounded-lg">
     {% csrf_token %}
+
     <div class="mb-4">
       <label for="id_requester" class="block text-sm font-medium text-gray-700">Patient:</label>
       <select name="patient_id" required class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
@@ -11,10 +12,29 @@
         {% endfor %}
       </select>
     </div>
+
+    <!-- Diagnosis Section -->
+    <h2 class="font-semibold text-lg text-gray-800 mb-2">Diagnosis</h2>
+
+    <div class="mb-4">
+      <label for="id_DOB" class="block text-sm font-medium text-gray-700">Illness:</label>
+      <input type="text" name="illness" required id="id_DOB" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" list="illness_list" />
+      <datalist id="illness_list">
+        {% if illness_list %}
+          {% for illness in illness_list %}
+            <option value="{{ illness.illness_name }}"></option>
+          {% endfor %}
+        {% endif %}
+      </datalist>
+    </div>
+
     <div class="mb-4">
       <label for="id_DOB" class="block text-sm font-medium text-gray-700">Check up Details:</label>
-      <textarea type="textarea" name="checkup_details" required id="id_DOB" class="h-24 mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">{{ record.checkup_details }}</textarea>
+      <textarea name="checkup_details" required id="id_DOB" class="h-24 mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">{{ record.checkup_details }}</textarea>
     </div>
+
+    <!-- Treatment Section -->
+    <h2 class="font-semibold text-lg text-gray-800 mb-2">Treatment</h2>
 
     <div class="mb-4">
       <label for="id_medicine" class="block text-sm font-medium text-gray-700">Issue Medicine:</label>
@@ -31,7 +51,7 @@
         <button type="submit" class="w-1/2 px-4 py-2 bg-blue-500 text-white rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100">Add Checkup</button>
         <a href="{% url 'add-patient' %}" class="w-1/2 px-4 py-2 bg-orange-300 text-grey-800 hover:text-white rounded-md shadow-sm hover:bg-orange-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-gray-100 text-center">Add Patient</a>
       </div>
-      <div class="flex justify center">
+      <div class="flex justify-center">
         <a href="{% url 'check_up_home' %}" class="w-full px-4 py-2 bg-gray-300 text-gray-700 rounded-md shadow-sm hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100 text-center hover:text-white">Cancel</a>
       </div>
     </div>
