@@ -19,6 +19,7 @@ def add_patient_view(request):
             messages.success(request, 'Patient successfully added')
             return redirect('patient-list')
         else:
+            print(form.errors)
             messages.error(request, 'Error adding the patient')
         referrer = request.META.get("HTTP_REFERER")
         if referrer:
