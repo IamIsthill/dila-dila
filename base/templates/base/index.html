@@ -12,16 +12,6 @@
       </div>
     </div>
 
-    <!-- Card 2: Total Requests -->
-    <div class="bg-white shadow-lg rounded-lg p-2 flex flex-col justify-between transition-transform transform hover:scale-105 h-full">
-      <div class="text-center">
-        <h2 class="text-lg font-semibold mb-1 flex justify-center items-center"><i class="fas fa-file-medical text-green-500 mr-2"></i> Total Requests Made : <span class="pl-2 text-2xl font-bold">{{ request_count }}</span></h2>
-      </div>
-      <div class="flex justify-center items-center mt-1 pb-2">
-        <a href="{% url 'add-request' %}" class="bg-green-500 text-white font-bold py-1 px-3 rounded hover:bg-green-600 transition-colors"><i class="fas fa-prescription-bottle-alt mr-1"></i> Add New Request</a>
-      </div>
-    </div>
-
     <!-- Card 3: Released Medicines -->
     <div class="bg-white shadow-lg rounded-lg p-2 flex flex-col justify-between transition-transform transform hover:scale-105 h-full">
       <div class="text-center">
@@ -31,13 +21,22 @@
         <a href="{% url 'create_checkup' %}" class="bg-red-500 text-white font-bold py-1 px-3 rounded hover:bg-red-600 transition-colors"><i class="fas fa-stethoscope mr-1"></i> Add New Checkup</a>
       </div>
     </div>
+    <!-- Card 2: Total Requests -->
+    <div class="bg-white shadow-lg rounded-lg p-2 flex flex-col justify-between transition-transform transform hover:scale-105 h-full">
+      <div class="text-center">
+        <h2 class="text-lg font-semibold mb-1 flex justify-center items-center"><i class="fas fa-file-medical text-green-500 mr-2"></i> Total Requests Made : <span class="pl-2 text-2xl font-bold">{{ request_count }}</span></h2>
+      </div>
+      <div class="flex justify-center items-center mt-1 pb-2">
+        <a href="{% url 'add-request' %}" class="bg-green-500 text-white font-bold py-1 px-3 rounded hover:bg-green-600 transition-colors"><i class="fas fa-prescription-bottle-alt mr-1"></i> Add New Request</a>
+      </div>
+    </div>
   </div>
 
   <!-- Central Chart Section -->
   <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
     <!-- Illness Statistics Section -->
     <div class="shadow-lg rounded-xl p-6 mb-8 md:col-span-2 bg-white border border-gray-300 hover:shadow-2xl transition-shadow duration-300">
-      <h2 class="text-3xl font-bold text-left mb-6 text-gray-800">Illness Statistics</h2>
+      <h2 class="text-3xl font-bold text-left mb-6 text-gray-800">Cases Statistics</h2>
       <canvas id="illness_chart"></canvas>
     </div>
 
@@ -146,7 +145,7 @@
             },
             title: {
               display: true,
-              text: 'Illness Type',
+              text: 'Categories',
               font: {
                 size: 16,
                 weight: 'bold'
