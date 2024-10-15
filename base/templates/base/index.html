@@ -59,10 +59,24 @@
         <p class="text-gray-500 mt-4">No recent checkups available.</p>
       {% endif %}
 
-      <div class="mt-4">
-        <!-- Added margin-top for spacing -->
-        {% if items %}
-          {% include 'paginate.html' %}
+      <div class="bg-mint-200 p-2 rounded-lg -mb-6">
+        <!-- Mint green background for the overall container -->
+        {% if items.paginator.num_pages > 1 %}
+          <div class="pagination bg-white p-1 flex items-center justify-center">
+            <span class="step-links flex items-center gap-1">
+              {% if items.has_previous %}
+                <a href="?page=1" class="px-4 py-2 bg-blue-200 text-blue-700 rounded-lg hover:bg-blue-300 transition-colors duration-200 ease-in-out">&laquo; First</a>
+                <a href="?page={{ items.previous_page_number }}" class="px-4 py-2 bg-blue-200 text-blue-700 rounded-lg hover:bg-blue-300 transition-colors duration-200 ease-in-out">Previous</a>
+              {% endif %}
+
+              <span class="current px-4 py-2 bg-blue-500 text-white rounded-lg">{{ items.number }} of {{ items.paginator.num_pages }}</span>
+
+              {% if items.has_next %}
+                <a href="?page={{ items.next_page_number }}" class="px-4 py-2 bg-blue-200 text-blue-700 rounded-lg hover:bg-blue-300 transition-colors duration-200 ease-in-out">Next</a>
+                <a href="?page={{ items.paginator.num_pages }}" class="px-4 py-2 bg-blue-200 text-blue-700 rounded-lg hover:bg-blue-300 transition-colors duration-200 ease-in-out">Last &raquo;</a>
+              {% endif %}
+            </span>
+          </div>
         {% endif %}
       </div>
     </div>

@@ -10,8 +10,7 @@
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 0;
-        background-color: #f4f4f4;
-        background-color: rgb(218 255 239);
+        background-color: rgb(218, 255, 239);
       }
       header {
         color: white;
@@ -66,43 +65,175 @@
       .align-middle {
         vertical-align: middle;
       }
+      .responsive-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+      }
+      
+      .responsive-table th,
+      .responsive-table td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+      }
+      
+      .responsive-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+      
+      .responsive-table th {
+        background-color: #f2f2f2;
+      }
+      
+      h2 {
+        margin-top: 20px;
+        margin-bottom: 10px;
+        font-size: 1.5em;
+        color: #333;
+      }
     </style>
   </head>
   <body>
     <header>
-      <h1>Patient Report</h1>
+      <h1>Patient Record</h1>
     </header>
     <main>
       <div>
-        <table>
-          <tr>
-            <th class="text-center" colspan="2">Profile</th>
-          </tr>
-          <tr>
-            <td>First Name</td>
-            <td>{{ patient.first_name }}</td>
-          </tr>
-          <tr>
-            <td>Last Name</td>
-            <td>{{ patient.last_name }}</td>
-          </tr>
-          <tr>
-            <td>Date of Birth</td>
-            <td>{{ patient.DOB }}</td>
-          </tr>
-          <tr>
-            <td>Address</td>
-            <td>{{ patient.address }}</td>
-          </tr>
-          <tr>
-            <td>Contact</td>
-            <td>{{ patient.contact }}</td>
-          </tr>
-          <tr>
-            <td>Date Joined</td>
-            <td>{{ patient.added }}</td>
-          </tr>
-        </table>
+        <h2>Personal Information</h2>
+        <div class="responsive-table">
+          <table>
+            <tr>
+              <td style="padding:0" colspan="2">
+                <table>
+                  <tr>
+                    <td>First Name: {{ patient.first_name }}</td>
+                    <td>Middle Name: {{ patient.middle_name|default_if_none:'' }}</td>
+                    <td>Last Name: {{ patient.last_name }}</td>
+                    <td>Suffix: {{ patient.suffix|default_if_none:'' }}</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2" style="padding:0">
+                <table>
+                  <tr>
+                    <td>Sex: {{ patient.sex }}</td>
+                    <td>Civil Status: {{ patient.civil_status }}</td>
+                    <td>Blood Type: {{ patient.blood_type }}</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2" style="padding: 0">
+                <table>
+                  <tr>
+                    <td>Date of Birth: {{ patient.DOB|date:'m/d/Y' }}</td>
+                    <td>Contact Number: {{ patient.contact }}</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            {% if patient.sex == 'Female' %}
+              <tr>
+                <td>Maiden Name:</td>
+                <td>{{ patient.maiden_name }}</td>
+              </tr>
+            {% endif %}
+            <tr>
+              <td>Place of Birth:</td>
+              <td>{{ patient.birth_place }}</td>
+            </tr>
+          </table>
+        </div>
+
+        <h2>Family Information</h2>
+        <div class="responsive-table">
+          <table>
+            <tr>
+              <td>Address:</td>
+              <td>{{ patient.address }}</td>
+            </tr>
+            <tr>
+              <td>Mother's Name:</td>
+              <td>{{ patient.mother_name }}</td>
+            </tr>
+            <tr>
+              <td>Spouse's Name:</td>
+              <td>{{ patient.spouse_name }}</td>
+            </tr>
+            <tr>
+              <td>Family Member:</td>
+              <td>{{ patient.family_member }}</td>
+            </tr>
+          </table>
+        </div>
+
+        <h2>Socio-Economic Background</h2>
+        <div class="responsive-table">
+          <table>
+            <tr>
+              <td>Educational Attainment:</td>
+              <td>{{ patient.education }}</td>
+            </tr>
+            <tr>
+              <td>Employment Status:</td>
+              <td>{{ patient.employment_status }}</td>
+            </tr>
+          </table>
+        </div>
+
+        <h2>Additional Information</h2>
+        <div class="responsive-table">
+          <table>
+            <tr>
+              <td>Member of DWSD NHTS?</td>
+              <td>{{ patient.is_nhts|yesno:'Yes,No' }}</td>
+            </tr>
+            {% if patient.is_nhts %}
+              <tr>
+                <td>Facility Household Number:</td>
+                <td>{{ patient.facility_household_no }}</td>
+              </tr>
+            {% endif %}
+            <tr>
+              <td>Patient beneficiary of 4Ps?</td>
+              <td>{{ patient.is_4ps|yesno:'Yes,No' }}</td>
+            </tr>
+            {% if patient.is_4ps %}
+              <tr>
+                <td>Household Number:</td>
+                <td>{{ patient.household_no }}</td>
+              </tr>
+            {% endif %}
+            <tr>
+              <td>Patient member of PhilHealth?</td>
+              <td>{{ patient.is_philhealth|yesno:'Yes,No' }}</td>
+            </tr>
+            {% if patient.is_philhealth %}
+              <tr>
+                <td>PhilHealth Number:</td>
+                <td>{{ patient.philhealth_no }}</td>
+              </tr>
+              <tr>
+                <td>Member Status Type:</td>
+                <td>{{ patient.status_type }}</td>
+              </tr>
+              {% if patient.status_type == 'Member' %}
+                <tr>
+                  <td>Member Category Type:</td>
+                  <td>{{ patient.member_category }}</td>
+                </tr>
+              {% endif %}
+            {% endif %}
+            <tr>
+              <td>Patient member of Primary Care Benefit (PCB)?</td>
+              <td>{{ patient.is_pcb|yesno:'Yes,No' }}</td>
+            </tr>
+          </table>
+        </div>
       </div>
       <div>
         <table>
@@ -167,7 +298,12 @@
                         <table>
                           <tr>
                             <th style="background-color: white;" colspan="1">Check Up</th>
-                            <td colspan="5">{{ item.check_up.checkup_details }}</td>
+                            <td colspan="5">
+                              <div>
+                                <p>Case Category: {{ item.check_up.illness.illness_name }}</p>
+                                <p>Details: {{ item.check_up.checkup_details }}</p>
+                              </div>
+                            </td>
                           </tr>
                         </table>
                       </td>
@@ -180,7 +316,7 @@
                           <th style="background-color: white;" colspan="1">Request</th>
                           <td colspan="5">
                             <p class="px-6 py-2">Medicine: {{ item.medicine }}</p>
-                            <p class="px- py-2">Quantity: {{ item.quantity }}</p>
+                            <p class="px-6 py-2">Quantity: {{ item.quantity }}</p>
                             {% with f='Fulfilled' u='Unfulfilled' %}
                               <p class="px-6 py-2">
                                 Status:{% if item.date_fulfilled %}
