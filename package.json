@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "chartjs-plugin-zoom": "^2.0.1",
     "tailwindcss": "^3.4.4"
   },
   "dependencies": {

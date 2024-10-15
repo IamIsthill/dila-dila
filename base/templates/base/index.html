@@ -49,6 +49,7 @@
   </div>
 
   <script type="module" src="{% static 'chart.js/dist/chart.umd.js' %}"></script>
+  <script type="module" src="{% static 'chartjs-plugin-zoom/dist/chartjs-plugin-zoom.min.js' %}"></script>
   {{ illness_data|json_script:'illness_data' }}
   <script type="module">
     const illness_data = JSON.parse(document.getElementById('illness_data').textContent)
@@ -130,10 +131,40 @@
                 weight: 'bold'
               },
               color: '#333'
+            },
+            ticks: {
+              autoSkip: true, // Automatically skip labels when there are too many
+              maxTicksLimit: 10, // Maximum number of labels to show
+              maxRotation: 90 // Maximum rotation angle for labels
             }
           }
         },
         plugins: {
+          zoom: {
+            pan: {
+              enabled: true,
+              scaledMode: 'x'
+            },
+            limits: {
+              x: {
+                min: 0
+              }
+            },
+            zoom: {
+              wheel: {
+                enabled: true,
+                speed: 0.001
+              },
+              drag: {
+                enabled: true,
+                threshold: 100
+              },
+              pinch: {
+                enabled: true
+              },
+              mode: 'x'
+            }
+          },
           tooltip: {
             callbacks: {
               label: function (tooltipItem) {
