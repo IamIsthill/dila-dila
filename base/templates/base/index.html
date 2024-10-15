@@ -3,48 +3,69 @@
 {% block main %}
   <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 -mt-5 pt-0">
     <!-- Card 1: Total Patients -->
-    <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col justify-between transition-transform transform hover:scale-105">
+    <div class="bg-white shadow-lg rounded-lg p-2 flex flex-col justify-between transition-transform transform hover:scale-105 h-full">
       <div class="text-center">
-        <h2 class="text-lg font-semibold mb-2 flex justify-center items-center"><i class="fas fa-users text-blue-500 mr-2"></i> Total Patients</h2>
-        <p class="text-3xl font-bold">{{ patient_count }}</p>
+        <h2 class="text-lg font-semibold flex justify-center items-center"><i class="fas fa-users text-blue-500 mr-2"></i> Total Patients : <span class="pl-2 text-2xl font-bold">{{ patient_count }}</span></h2>
       </div>
-      <div class="flex justify-center items-center mt-6">
-        <a href="{% url 'add-patient' %}" class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 transition-colors"><i class="fas fa-user-plus mr-2"></i> Add New Patient</a>
+      <div class="flex justify-center items-center mt-1 pb-2">
+        <a href="{% url 'add-patient' %}" class="bg-blue-500 text-white font-bold py-1 px-3 rounded hover:bg-blue-600 transition-colors"><i class="fas fa-user-plus mr-1"></i> Add New Patient</a>
       </div>
     </div>
 
     <!-- Card 2: Total Requests -->
-    <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col justify-between transition-transform transform hover:scale-105">
+    <div class="bg-white shadow-lg rounded-lg p-2 flex flex-col justify-between transition-transform transform hover:scale-105 h-full">
       <div class="text-center">
-        <h2 class="text-lg font-semibold mb-2 flex justify-center items-center"><i class="fas fa-file-medical text-green-500 mr-2"></i> Total Requests Made</h2>
-        <p class="text-3xl font-bold">{{ request_count }}</p>
+        <h2 class="text-lg font-semibold mb-1 flex justify-center items-center"><i class="fas fa-file-medical text-green-500 mr-2"></i> Total Requests Made : <span class="pl-2 text-2xl font-bold">{{ request_count }}</span></h2>
       </div>
-      <div class="flex justify-center items-center mt-6">
-        <a href="{% url 'add-request' %}" class="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-600 transition-colors"><i class="fas fa-prescription-bottle-alt mr-2"></i> Add New Request</a>
+      <div class="flex justify-center items-center mt-1 pb-2">
+        <a href="{% url 'add-request' %}" class="bg-green-500 text-white font-bold py-1 px-3 rounded hover:bg-green-600 transition-colors"><i class="fas fa-prescription-bottle-alt mr-1"></i> Add New Request</a>
       </div>
     </div>
 
     <!-- Card 3: Released Medicines -->
-    <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col justify-between transition-transform transform hover:scale-105">
+    <div class="bg-white shadow-lg rounded-lg p-2 flex flex-col justify-between transition-transform transform hover:scale-105 h-full">
       <div class="text-center">
-        <h2 class="text-lg font-semibold mb-2 flex justify-center items-center"><i class="fas fa-pills text-red-500 mr-2"></i> Released Medicines</h2>
-        <p class="text-3xl font-bold">{{ quantity }}</p>
+        <h2 class="text-lg font-semibold mb-1 flex justify-center items-center"><i class="fas fa-pills text-red-500 mr-2"></i> Released Medicines : <span class="pl-2 text-2xl font-bold">{{ quantity }}</span></h2>
       </div>
-      <div class="flex justify-center items-center mt-6">
-        <a href="{% url 'create_checkup' %}" class="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600 transition-colors"><i class="fas fa-stethoscope mr-2"></i> Add New Checkup</a>
+      <div class="flex justify-center items-center mt-1 pb-2">
+        <a href="{% url 'create_checkup' %}" class="bg-red-500 text-white font-bold py-1 px-3 rounded hover:bg-red-600 transition-colors"><i class="fas fa-stethoscope mr-1"></i> Add New Checkup</a>
       </div>
     </div>
   </div>
 
   <!-- Central Chart Section -->
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-    <div class="shadow-lg rounded-lg p-6 mb-8 md:col-span-2 bg-white border border-gray-200 hover:shadow-xl transition-shadow duration-200">
-      <h2 class="text-2xl font-bold text-left mb-6 text-gray-800">Illness Statistics</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <!-- Illness Statistics Section -->
+    <div class="shadow-lg rounded-xl p-6 mb-8 md:col-span-2 bg-white border border-gray-300 hover:shadow-2xl transition-shadow duration-300">
+      <h2 class="text-3xl font-bold text-left mb-6 text-gray-800">Illness Statistics</h2>
       <canvas id="illness_chart"></canvas>
     </div>
-    <div class="p-6 pt-6 m-8 mt-2 border-gray-200 hover:shadow-xl transition-shadow duration-200 col-span-1">
-      <h2 class="text-2xl text-left text-gray-800">Recent Checkups</h2>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita illum necessitatibus quae nisi soluta consequuntur, quia, corrupti amet voluptatibus blanditiis quidem cumque repellat libero consectetur dolores illo nihil dolorem, sint aut rem quibusdam optio perspiciatis autem. Perferendis, voluptatibus reiciendis, eveniet non vitae cumque, harum ipsam iure exercitationem quo quod a tempore autem officiis deserunt sint soluta. Repellat a eveniet tempora numquam tenetur suscipit deserunt aut quia obcaecati nemo eum, nobis ea corrupti? Enim, quos iusto. Culpa facere dignissimos, perferendis voluptatum consectetur voluptates, nihil, minus sapiente neque quae molestias assumenda modi! Ullam error soluta nulla, incidunt libero ab quaerat fugit quod?</p>
+
+    <!-- Recent Checkups Section -->
+    <div class="max-h-[600px] flex flex-col p-6 m-8 mt-0 border border-gray-300 rounded-xl bg-white shadow-lg hover:shadow-2xl transition-shadow duration-300 col-span-1">
+      <h2 class="text-2xl font-bold text-left mb-4 text-gray-800">Recent Checkups</h2>
+
+      {% if items %}
+        <div class="flex-grow max-h-[400px] overflow-y-auto space-y-4">
+          <!-- Set max height for scroll -->
+          <!-- Loop through items -->
+          {% for item in items %}
+            <div class="p-5 bg-gray-50 rounded-lg shadow-md hover:bg-gray-100 transition-colors duration-200">
+              <p class="font-semibold text-lg text-gray-700">{{ item.illness.illness_name }}</p>
+              <p class="text-sm text-gray-600">{{ item.checkup_details|truncatechars:30 }}</p>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="text-gray-500 mt-4">No recent checkups available.</p>
+      {% endif %}
+
+      <div class="mt-4">
+        <!-- Added margin-top for spacing -->
+        {% if items %}
+          {% include 'paginate.html' %}
+        {% endif %}
+      </div>
     </div>
   </div>
 
@@ -71,7 +92,7 @@
         labels: labels,
         datasets: [
           {
-            label: 'Illnesses',
+            label: 'Cases',
             data: counts,
             backgroundColor: [
               'rgba(54, 162, 235, 0.6)', // Light Blue
@@ -176,7 +197,7 @@
             bodyColor: '#fff' // Tooltip body color
           },
           legend: {
-            display: true,
+            display: false,
             position: 'top', // Position of the legend
             labels: {
               boxWidth: 20,
