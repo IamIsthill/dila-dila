@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block main %}
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 -mt-5 pt-0">
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6 -mt-5 pt-0">
     <!-- Card 1: Total Patients -->
     <div class="bg-white shadow-lg rounded-lg p-2 flex flex-col justify-between transition-transform transform hover:scale-105 h-full">
       <div class="text-center">
@@ -33,9 +33,9 @@
   </div>
 
   <!-- Central Chart Section -->
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-6">
     <!-- Illness Statistics Section -->
-    <div class="shadow-lg rounded-xl p-6 mb-8 md:col-span-2 bg-white border border-gray-300 hover:shadow-2xl transition-shadow duration-300">
+    <div class="shadow-lg rounded-xl p-6 mb-8 lg:col-span-2 bg-white border border-gray-300 hover:shadow-2xl transition-shadow duration-300">
       <h2 class="text-3xl font-bold text-left mb-6 text-gray-800">Cases Statistics</h2>
       <canvas id="illness_chart"></canvas>
     </div>
@@ -63,7 +63,7 @@
         <!-- Mint green background for the overall container -->
         {% if items.paginator.num_pages > 1 %}
           <div class="pagination bg-white p-1 flex items-center justify-center">
-            <span class="step-links flex items-center gap-1">
+            <span class="step-links flex items-center gap-1 flex">
               {% if items.has_previous %}
                 <a href="?page=1" class="px-4 py-2 bg-blue-200 text-blue-700 rounded-lg hover:bg-blue-300 transition-colors duration-200 ease-in-out">&laquo; First</a>
                 <a href="?page={{ items.previous_page_number }}" class="px-4 py-2 bg-blue-200 text-blue-700 rounded-lg hover:bg-blue-300 transition-colors duration-200 ease-in-out">Previous</a>
