@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block main %}
-  <form action="" method="POST" class="max-w-md mx-auto p-6 bg-white shadow-md rounded-lg">
+  {% comment %} <form action="" method="POST" class="max-w-md mx-auto p-6 bg-white shadow-md rounded-lg">
     {% csrf_token %}
     <div class="mb-4">
       <label for="id_first_name" class="block text-sm font-medium text-gray-700">First Name:</label>
@@ -24,5 +24,357 @@
     </div>
     <button type="submit" class="w-full px-4 py-2 bg-blue-500 text-white rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100">Edit Patient</button>
     <a href="{% url 'patient-list' %}" class="block mt-2 w-full px-4 py-2 bg-gray-300 text-gray-800 rounded-md shadow-sm hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:ring-offset-gray-100 text-center">Cancel</a>
+  </form> {% endcomment %}
+  <form action="" method="POST" class="max-w-xl mx-auto p-6 bg-white shadow-md rounded-lg">
+    {% csrf_token %}
+
+    <!-- Personal Information -->
+    <h2 class="text-lg font-medium mb-4">Personal Information</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-1">
+      <div class="mb-4">
+        <label for="id_first_name" class="block text-sm font-medium text-gray-700">First Name:</label>
+        <input type="text" name="first_name" id="id_first_name" maxlength="100" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" value="{{ patient.first_name }}" required />
+      </div>
+
+      <div class="mb-4">
+        <label for="id_middle_name" class="block text-sm font-medium text-gray-700">Middle Name:</label>
+        <input type="text" name="middle_name" id="id_middle_name" maxlength="100" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" value="{{ patient.middle_name|default_if_none:'' }}" placeholder="Leave blank if not applicable" />
+      </div>
+
+      <div class="mb-4">
+        <label for="id_last_name" class="block text-sm font-medium text-gray-700">Last Name:</label>
+        <input type="text" name="last_name" id="id_last_name" maxlength="100" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" required value="{{ patient.last_name|default_if_none:'' }}" />
+      </div>
+
+      <div class="mb-4">
+        <label for="id_suffix" class="block text-sm font-medium text-gray-700">Suffix:</label>
+        <input type="text" name="suffix" id="id_suffix" maxlength="20" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" value="{{ patient.suffix|default_if_none:'' }}" placeholder="Leave blank if not applicable" />
+      </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-1">
+      <div class="mb-4">
+        <label for="id_sex" class="block text-sm font-medium text-gray-700">Sex:</label>
+        <select name="sex" id="id_sex" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+          {% if patient.sex == 'Male' %}
+            <option value="Male" selected>Male</option>
+            <option value="Female">Female</option>
+          {% else %}
+            <option value="Male">Male</option>
+            <option value="Female" selected>Female</option>
+          {% endif %}
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="id_civil_status" class="block text-sm font-medium text-gray-700">Civil Status:</label>
+        <select name="civil_status" id="id_civil_status" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+            <option value="Single" {% if patient.civil_status == 'Single' %}selected{% endif %}>Single</option>
+            <option value="Married" {% if patient.civil_status == 'Married' %}selected{% endif %}>Married</option>
+            <option value="Annulled" {% if patient.civil_status == 'Annulled' %}selected{% endif %}>Annulled</option>
+            <option value="Widow/er" {% if patient.civil_status == 'Widow/er' %}selected{% endif %}>Widow/er</option>
+            <option value="Separated" {% if patient.civil_status == 'Separated' %}selected{% endif %}>Separated</option>
+            <option value="Co-Habitation" {% if patient.civil_status == 'Co-Habitation' %}selected{% endif %}>Co-Habitation</option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label for="id_blood_type" class="block text-sm font-medium text-gray-700">Blood Type:</label>
+        <input type="text" name="blood_type" id="id_blood_type" class="mt-1 block w-full px-3 py-1.5 border border-gray-300 rounded-md shadow-sm" value="{{ patient.blood_type }}" required list="blood_list" />
+        <datalist id="blood_list">
+          <option value="A-"></option>
+          <option value="A+"></option>
+          <option value="B-"></option>
+          <option value="B+"></option>
+          <option value="AB-"></option>
+          <option value="AB+"></option>
+          <option value="O-"></option>
+          <option value="O+"></option>
+        </datalist>
+      </div>
+    </div>
+    <div class="mb-4 maiden_name_div {% if patient.sex == 'Female' %}block{%else%}hidden{% endif %}">
+      <label for="id_maiden_name" class="block text-sm font-medium text-gray-700">Maiden Name:</label>
+      <input type="text" name="maiden_name" id="id_maiden_name" maxlength="100" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" {% if patient.sex == 'Female' %}required{% endif %} value="{{patient.maiden_name|default_if_none:''}}" />
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-1">
+      <div class="mb-4">
+        <label for="id_DOB" class="block text-sm font-medium text-gray-700">Date of Birth:</label>
+        <input type="date" name="DOB" id="id_DOB" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" value="{{ patient.DOB|date:'Y-m-d' }}"  required />
+      </div>
+
+      <div class="mb-4">
+        <label for="id_contact" class="block text-sm font-medium text-gray-700">Contact Number:</label>
+        <input type="text" name="contact" id="id_contact" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" value="{{ patient.contact }}" required />
+      </div>
+    </div>
+    <div class="mb-4">
+      <label for="id_birth_place" class="block text-sm font-medium text-gray-700">Place of Birth:</label>
+      <input name="birth_place" id="id_birth_place" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" value="{{ patient.birth_place }}" required />
+    </div>
+
+    <h2 class="text-lg font-medium mb-4">Family Information</h2>
+    <div class="mb-4">
+      <label for="id_address" class="block text-sm font-medium text-gray-700">Address:</label>
+      <textarea name="address" id="id_address" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" required>{{ patient.address }}</textarea>
+    </div>
+
+    <div class="mb-4">
+      <label for="id_mother_name" class="block text-sm font-medium text-gray-700">Mother's Name:</label>
+      <input type="text" name="mother_name" id="id_mother_name" maxlength="100" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" value="{{ patient.mother_name }}" required />
+    </div>
+    <div class="mb-4">
+      <label for="id_spouse_name" class="block text-sm font-medium text-gray-700">Spouse's Name:</label>
+      <input type="text" name="spouse_name" id="id_spouse_name" maxlength="50" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" value="{{ patient.spouse_name }}" placeholder="N/A if not applicable" />
+    </div>
+    <div class="mb-4">
+      <label for="id_family_member" class="block text-sm font-medium text-gray-700">Family Member:</label>
+      <input type="text" name="family_member" id="id_family_member" maxlength="20" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" list="family" required value="{{patient.family_member}}" />
+      <datalist id="family">
+        <option value="Father"></option>
+        <option value="Mother"></option>
+        <option value="Son"></option>
+        <option value="Daughter"></option>
+      </datalist>
+    </div>
+
+    <!-- Socio-Economic Background -->
+    <h2 class="text-lg font-medium mb-4">Socio-Economic Background</h2>
+    <div class="mb-4">
+      <label for="id_education" class="block text-sm font-medium text-gray-700">Educational Attainment:</label>
+      <select type="text" name="education" id="id_education" maxlength="40" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+        <option value="No Formal Education" {% if patient.education == 'No Formal Education' %}selected{% endif %}>No Formal Education</option>
+        <option value="Elementary" {% if patient.education == 'Elementary' %}selected{% endif %}>Elementary</option>
+        <option value="High School" {% if patient.education == 'High School' %}selected{% endif %}>High School</option>
+        <option value="Vocational" {% if patient.education == 'Vocational' %}selected{% endif %}>Vocational</option>
+        <option value="College" {% if patient.education == 'College' %}selected{% endif %}>College</option>
+        <option value="Post Graduate" {% if patient.education == 'Post Graduate' %}selected{% endif %}>Post Graduate</option>
+      </select>
+    </div>
+    <div class="mb-4">
+      <label for="id_employment_status" class="block text-sm font-medium text-gray-700">Employment Status:</label>
+      <select type="text" name="employment_status" id="id_employment_status" maxlength="20" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+        <option value="Student" {% if patient.employment_status == 'Student' %}selected{% endif %}>Student</option>
+        <option value="Employed" {% if patient.employment_status == 'Employed' %}selected{% endif %}>Employed</option>
+        <option value="Retired" {% if patient.employment_status == 'Retired' %}selected{% endif %}>Retired</option>
+        <option value="Unknown" {% if patient.employment_status == 'Unknown' %}selected{% endif %}>Unknown</option>
+        <option value="None/Unemployed" {% if patient.employment_status == 'None/Unemployed' %}selected{% endif %}>None/Unemployed</option>
+      </select>
+    </div>
+
+    <!-- Government and Health Coverage Information -->
+    <h2 class="text-lg font-medium mb-4">Additional Information</h2>
+
+    <div class="mb-4 flex justify-normal">
+      <label for="" class="text-sm font-medium text-gray-700">Patient member of DWSD NHTS?</label>
+      <div class="flex items-center ml-2">
+        <input type="radio" name="is_nhts" id="id_is_nhts_yes" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" value="yes" {% if patient.is_nhts %}checked{% endif %} />
+        <label for="id_is_nhts_yes" class="ml-2 text-sm font-medium text-gray-700">Yes</label>
+      </div>
+      <div class="flex items-center ml-4">
+        <input type="radio" name="is_nhts" id="id_is_nhts_no" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" value="no" {% if not patient.is_nhts %}checked{% endif %} />
+        <label for="id_is_nhts_no" class="ml-2 text-sm font-medium text-gray-700">No</label>
+      </div>
+    </div>
+    <div class="mb-4 facility_household_no_div {% if not patient.is_nhts %}hidden{% endif %}">
+      <label for="" class="block text-sm font-medium text-gray-700">Facility Household Number:</label>
+      <input type="number" name="facility_household_no" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" id="id_facility_household_no" {% if patient.is_nhts %}required{% endif %} value="{{patient.facility_household_no|default_if_none:''}}" />
+    </div>
+    <div class="mb-4 flex justify-normal">
+      <label for="" class="text-sm font-medium text-gray-700">Patient beneficiary of 4Ps?</label>
+      <div class="flex items-center ml-2">
+        <input type="radio" name="is_4ps" id="id_is_4ps_yes" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" value="yes" {% if patient.is_4ps %}checked{% endif %} />
+        <label for="id_is_4ps_yes" class="ml-2 text-sm font-medium text-gray-700">Yes</label>
+      </div>
+      <div class="flex items-center ml-4">
+        <input type="radio" name="is_4ps" id="id_is_4ps_no" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" value="no" {% if not patient.is_4ps %}checked{% endif %} />
+        <label for="id_is_4ps_no" class="ml-2 text-sm font-medium text-gray-700">No</label>
+      </div>
+    </div>
+    <div class="mb-4 household_no_div {% if not patient.is_4ps %}hidden{% endif %}">
+      <label for="id_household_no" class="block text-sm font-medium text-gray-700">Household Number:</label>
+      <input type="text" name="household_no" id="id_household_no" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" {% if patient.is_4ps %}required{% endif %} value="{{patient.household_no|default_if_none:''}}" />
+    </div>
+
+    <!-- PhilHealth -->
+    <div class="mb-4 flex justify-normal">
+      <label for="" class="text-sm font-medium text-gray-700">Patient member of PhilHealth?</label>
+      <div class="flex items-center ml-2">
+        <input type="radio" name="is_philhealth" id="id_is_philhealth_yes" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" value="yes" {% if patient.is_philhealth %}checked{% endif %} />
+        <label for="id_is_philhealth_yes" class="ml-2 text-sm font-medium text-gray-700">Yes</label>
+      </div>
+      <div class="flex items-center ml-4">
+        <input type="radio" name="is_philhealth" id="id_is_philhealth_no" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" value="
+        no" {% if not patient.is_philhealth %}checked{% endif %}/>
+        <label for="id_is_philhealth_no" class="ml-2 text-sm font-medium text-gray-700">No</label>
+      </div>
+    </div>
+    <div class="mb-4 philhealth_div {% if not patient.is_philhealth %}hidden{% endif %}">
+      <label for="id_philhealth_no" class="block text-sm font-medium text-gray-700">PhilHealth Number:</label>
+      <input type="text" name="philhealth_no" id="id_philhealth_no" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" {% if patient.is_philhealth %}required{% endif %} value="{{patient.philhealth_no|default_if_none:''}}" />
+    </div>
+    <div class="mb-4 philhealth_div {% if not patient.is_philhealth %}hidden{% endif %}">
+      <label for="id_member_type" class="block text-sm font-medium text-gray-700">Member Status Type:</label>
+      <select type="text" name="status_type" id="id_member_type" maxlength="50" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+        <option value="Member" {% if patient.is_philhealth and patient.member_type == 'Member' %}selected{% endif %}>Member</option>
+        <option value="Dependent" {% if patient.is_philhealth and patient.member_type == 'Dependent' %}selected{% endif %}>Dependent</option>
+      </select>
+    </div>
+    <div class="mb-4 philhealth_div member_category_div {% if not patient.is_philhealth %}hidden{% elif patient.member_category == 'Dependent' %}hidden{% endif %}">
+      <label for="id_member_category" class="block text-sm font-medium text-gray-700">Member Category Type:</label>
+      <input type="text" name="member_category" id="id_member_category" maxlength="50" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" {% if patient.member_category == 'Member' %}required{% endif %} list="category_list" value="{{patient.member_category|default_if_none:''}}" />
+      <datalist id="category_list">
+        <option value="FE - Private: "></option>
+        <option value="FE - Goverment: "></option>
+        <option value="IE: "></option>
+      </datalist>
+    </div>
+    <div class="mb-4 flex justify-normal">
+      <label for="" class="text-sm font-medium text-gray-700">Patient member of Primary Care Benefit(PCB)?</label>
+      <div class="flex items-center ml-2">
+        <input type="radio" name="is_pcb" id="id_is_pcb_yes" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" value="yes" {% if patient.is_pcb %}checked{% endif %} />
+        <label for="id_is_pcb_yes" class="ml-2 text-sm font-medium text-gray-700">Yes</label>
+      </div>
+      <div class="flex items-center ml-4">
+        <input type="radio" name="is_pcb" id="id_is_pcb_no" class="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" value="no" {% if not patient.is_pcb %}checked{% endif %} />
+        <label for="id_is_pcb_no" class="ml-2 text-sm font-medium text-gray-700">No</label>
+      </div>
+    </div>
+
+    <button type="submit" class="w-full px-4 py-2 bg-blue-500 text-white rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-100">Edit Patient</button>
+    <a href="{% url 'patient-list' %}" class="block mt-2 w-full px-4 py-2 bg-gray-300 text-gray-800 rounded-md shadow-sm hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:ring-offset-gray-100 text-center">Cancel</a>
   </form>
+  <script>
+    listen_dswd_nhts()
+    listen_4ps()
+    listen_philhealth_member()
+    listen_philhealth_status()
+    listen_sex()
+    
+    function listen_dswd_nhts() {
+      const isYes = document.getElementById('id_is_nhts_yes')
+      const isNo = document.getElementById('id_is_nhts_no')
+      const input = document.getElementById('id_facility_household_no')
+    
+      isYes.addEventListener('change', () => {
+        if (isYes.checked) {
+          const div = document.querySelector('.facility_household_no_div')
+          div.classList.remove('hidden')
+          div.classList.add('block')
+          input.setAttribute('required', '')
+        }
+      })
+    
+      isNo.addEventListener('change', () => {
+        if (isNo.checked) {
+          input.removeAttribute('required')
+          const div = document.querySelector('.facility_household_no_div')
+          div.classList.remove('block')
+          div.classList.add('hidden')
+        }
+      })
+    }
+    
+    function listen_4ps() {
+      const isYes = document.getElementById('id_is_4ps_yes')
+      const isNo = document.getElementById('id_is_4ps_no')
+      const input = document.getElementById('id_household_no')
+    
+      isYes.addEventListener('change', () => {
+        if (isYes.checked) {
+          const div = document.querySelector('.household_no_div')
+          div.classList.remove('hidden')
+          div.classList.add('block')
+          input.setAttribute('required', '')
+        }
+      })
+    
+      isNo.addEventListener('change', () => {
+        if (isNo.checked) {
+          const div = document.querySelector('.household_no_div')
+          div.classList.remove('block')
+          div.classList.add('hidden')
+          input.removeAttribute('required')
+        }
+      })
+    }
+    
+    function listen_philhealth_member() {
+      const isYes = document.getElementById('id_is_philhealth_yes')
+      const isNo = document.getElementById('id_is_philhealth_no')
+      const philhealth_no = document.getElementById('id_philhealth_no')
+      const member_category = document.getElementById('id_member_category')
+    
+      isYes.addEventListener('change', () => {
+        if (isYes.checked) {
+          const divs = document.querySelectorAll('.philhealth_div')
+          philhealth_no.setAttribute('required', '')
+          member_category.setAttribute('required', '')
+          for (const div of divs) {
+            div.classList.remove('hidden')
+            div.classList.add('block')
+          }
+        }
+        const select = document.getElementById('id_member_type')
+        if (select.value == 'Dependent') {
+          const div = document.querySelector('.member_category_div')
+          div.classList.add('hidden')
+          div.classList.remove('block')
+          member_category.removeAttribute('required')
+        } else {
+          const div = document.querySelector('.member_category_div')
+          div.classList.add('block')
+          div.classList.remove('hidden')
+          member_category.setAttribute('required', '')
+        }
+      })
+    
+      isNo.addEventListener('change', () => {
+        if (isNo.checked) {
+          const divs = document.querySelectorAll('.philhealth_div')
+          philhealth_no.removeAttribute('required')
+          member_category.removeAttribute('required')
+          for (const div of divs) {
+            div.classList.remove('block')
+            div.classList.add('hidden')
+          }
+        }
+      })
+    }
+    
+    function listen_philhealth_status() {
+      const select = document.getElementById('id_member_type')
+      const member_category = document.getElementById('id_member_category')
+    
+      select.addEventListener('change', () => {
+        if (select.value == 'Dependent') {
+          member_category.removeAttribute('required')
+          const div = document.querySelector('.member_category_div')
+          div.classList.add('hidden')
+          div.classList.remove('block')
+        } else {
+          member_category.setAttribute('required', '')
+          const div = document.querySelector('.member_category_div')
+          div.classList.add('block')
+          div.classList.remove('hidden')
+        }
+      })
+    }
+    
+    function listen_sex() {
+      const select = document.getElementById('id_sex')
+      const maiden_input = document.getElementById('id_maiden_name')
+    
+      select.addEventListener('change', () => {
+        if (select.value == 'Male') {
+          const div = document.querySelector('.maiden_name_div')
+          div.classList.add('hidden')
+          div.classList.remove('block')
+          maiden_input.removeAttribute('required')
+        } else {
+          const div = document.querySelector('.maiden_name_div')
+          div.classList.add('block')
+          div.classList.remove('hidden')
+          maiden_input.setAttribute('required', '')
+        }
+      })
+    }
+  </script>
 {% endblock %}

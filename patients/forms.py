@@ -77,6 +77,7 @@ class PatientForm(forms.Form):
             patient = Patient.objects.create(
                 first_name = first_name,
                 last_name = last_name,
+                suffix=suffix, 
                 middle_name = middle_name,
                 blood_type = blood_type,
                 DOB = DOB,
