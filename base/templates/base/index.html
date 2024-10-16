@@ -1,79 +1,230 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block main %}
-  <!-- Grid Layout -->
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-10">
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6 -mt-5 pt-0">
     <!-- Card 1: Total Patients -->
-    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-      <div class="px-4 py-6 flex flex-col items-center">
-        <h2 class="text-xl font-bold mb-4 flex items-center">
-          <i class="fas fa-users mr-2"></i>
-          Total Patients
-        </h2>
-        <h3 class="text-xl font-bold mb-4"><span class="patient-count">Total Patient(s): {{ patient_count }}</span></h3>
+    <div class="bg-white shadow-lg rounded-lg p-2 flex flex-col justify-between transition-transform transform hover:scale-105 h-full">
+      <div class="text-center">
+        <h2 class="text-lg font-semibold flex justify-center items-center"><i class="fas fa-users text-blue-500 mr-2"></i> Total Patients : <span class="pl-2 text-2xl font-bold">{{ patient_count }}</span></h2>
       </div>
-      <div class="flex justify-center space-x-2 mt-20 mb-2">
-        <button class="all-patient-btn bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded transition duration-300">All</button>
-        <button class="monthly-patient-btn bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded transition duration-300">Monthly</button>
-        <button class="today-patient-btn bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded transition duration-300">Today</button>
-      </div>
-    </div>
-
-    <!-- Card 2: Total Requests -->
-    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-      <div class="px-4 py-6 flex flex-col items-center">
-        <h2 class="text-xl font-bold mb-4 flex items-center">
-          Total Requests Made
-          <i class="fas fa-file-medical ml-3"></i>
-        </h2>
-        <h3 class="text-xl font-bold mb-4 text-center">Total Request(s) Made: <span class="total">{{ request_count }}</span></h3>
-        <h4 class="font-bold mb-2 text-center">Fulfilled: <span class="fulfilled">{{ fulfilled_count }}</span></h4>
-        <h4 class="font-bold mb-2 text-center">Unfulfilled: <span class="unfulfilled">{{ unfulfilled_count }}</span></h4>
-      </div>
-      <div class="flex justify-center space-x-2 mt-4 mb-2">
-        <button class="all-request-btn bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded transition duration-300">All</button>
-        <button class="monthly-request-btn bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded transition duration-300">Monthly</button>
-        <button class="today-request-btn bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded transition duration-300">Today</button>
+      <div class="flex justify-center items-center mt-1 pb-2">
+        <a href="{% url 'add-patient' %}" class="bg-blue-500 text-white font-bold py-1 px-3 rounded hover:bg-blue-600 transition-colors"><i class="fas fa-user-plus mr-1"></i> Add New Patient</a>
       </div>
     </div>
 
     <!-- Card 3: Released Medicines -->
-    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-      <div class="px-4 py-6 flex flex-col items-center">
-        <h2 class="text-xl font-bold mb-4 flex items-center">
-          Released Medicines
-          <i class="fas fa-pills pl-3 ml-2"></i>
-        </h2>
-        <h3 class="text-xl font-bold mb-4 text-center">Released Medicine(s): <span class="quantity">{{ quantity }}</span></h3>
+    <div class="bg-white shadow-lg rounded-lg p-2 flex flex-col justify-between transition-transform transform hover:scale-105 h-full">
+      <div class="text-center">
+        <h2 class="text-lg font-semibold mb-1 flex justify-center items-center"><i class="fas fa-pills text-red-500 mr-2"></i> Released Medicines : <span class="pl-2 text-2xl font-bold">{{ quantity }}</span></h2>
       </div>
-      <div class="flex justify-center space-x-2 mt-20 mb-2">
-        <button class="all-medicine-btn bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded transition duration-300">All</button>
-        <button class="monthly-medicine-btn bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded transition duration-300">Monthly</button>
-        <button class="today-medicine-btn bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded transition duration-300">Today</button>
+      <div class="flex justify-center items-center mt-1 pb-2">
+        <a href="{% url 'create_checkup' %}" class="bg-red-500 text-white font-bold py-1 px-3 rounded hover:bg-red-600 transition-colors"><i class="fas fa-stethoscope mr-1"></i> Add New Checkup</a>
+      </div>
+    </div>
+    <!-- Card 2: Total Requests -->
+    <div class="bg-white shadow-lg rounded-lg p-2 flex flex-col justify-between transition-transform transform hover:scale-105 h-full">
+      <div class="text-center">
+        <h2 class="text-lg font-semibold mb-1 flex justify-center items-center"><i class="fas fa-file-medical text-green-500 mr-2"></i> Total Requests Made : <span class="pl-2 text-2xl font-bold">{{ request_count }}</span></h2>
+      </div>
+      <div class="flex justify-center items-center mt-1 pb-2">
+        <a href="{% url 'add-request' %}" class="bg-green-500 text-white font-bold py-1 px-3 rounded hover:bg-green-600 transition-colors"><i class="fas fa-prescription-bottle-alt mr-1"></i> Add New Request</a>
       </div>
     </div>
   </div>
 
-  <!-- Actions: Add New Patient and Add New Request -->
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
-    <div class="bg-white shadow-lg rounded-lg overflow-hidden p-12">
-      <div class="px-4 py-6 flex items-center justify-center">
-        <a href="{% url 'add-patient' %}" class="text-blue-500 hover:text-blue-700 flex items-center"><i class="fas fa-user-plus text-4xl mr-2"></i> Add New Patient</a>
-      </div>
+  <!-- Central Chart Section -->
+  <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- Illness Statistics Section -->
+    <div class="shadow-lg rounded-xl p-6 mb-8 lg:col-span-2 bg-white border border-gray-300 hover:shadow-2xl transition-shadow duration-300">
+      <h2 class="text-3xl font-bold text-left mb-6 text-gray-800">Cases Statistics</h2>
+      <canvas id="illness_chart"></canvas>
     </div>
 
-    <div class="bg-white shadow-lg rounded-lg overflow-hidden p-12">
-      <div class="px-4 py-6 flex items-center justify-center">
-        <a href="{% url 'add-request' %}" class="text-blue-500 hover:text-blue-700 flex items-center"><i class="fas fa-prescription-bottle-alt text-4xl mr-2"></i> Add New Request</a>
-      </div>
-    </div>
-    <div class="bg-white shadow-lg rounded-lg overflow-hidden p-12">
-      <div class="px-4 py-6 flex items-center justify-center">
-        <a href="{% url 'create_checkup' %}" class="text-blue-500 hover:text-blue-700 flex items-center"><i class="fas fa-stethoscope text-4xl mr-2"></i> Add New Checkup</a>
+    <!-- Recent Checkups Section -->
+    <div class="max-h-[600px] flex flex-col p-6 m-8 mt-0 border border-gray-300 rounded-xl bg-white shadow-lg hover:shadow-2xl transition-shadow duration-300 col-span-1">
+      <h2 class="text-2xl font-bold text-left mb-4 text-gray-800">Recent Checkups</h2>
+
+      {% if items %}
+        <div class="flex-grow max-h-[400px] overflow-y-auto space-y-4">
+          <!-- Set max height for scroll -->
+          <!-- Loop through items -->
+          {% for item in items %}
+            <div class="p-5 bg-gray-50 rounded-lg shadow-md hover:bg-gray-100 transition-colors duration-200">
+              <p class="font-semibold text-lg text-gray-700">{{ item.illness.illness_name }}</p>
+              <p class="text-sm text-gray-600">{{ item.checkup_details|truncatechars:30 }}</p>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="text-gray-500 mt-4">No recent checkups available.</p>
+      {% endif %}
+
+      <div class="bg-mint-200 p-2 rounded-lg -mb-6">
+        <!-- Mint green background for the overall container -->
+        {% if items.paginator.num_pages > 1 %}
+          <div class="pagination bg-white p-1 flex items-center justify-center">
+            <span class="step-links flex items-center gap-1 flex">
+              {% if items.has_previous %}
+                <a href="?page=1" class="px-4 py-2 bg-blue-200 text-blue-700 rounded-lg hover:bg-blue-300 transition-colors duration-200 ease-in-out">&laquo; First</a>
+                <a href="?page={{ items.previous_page_number }}" class="px-4 py-2 bg-blue-200 text-blue-700 rounded-lg hover:bg-blue-300 transition-colors duration-200 ease-in-out">Previous</a>
+              {% endif %}
+
+              <span class="current px-4 py-2 bg-blue-500 text-white rounded-lg">{{ items.number }} of {{ items.paginator.num_pages }}</span>
+
+              {% if items.has_next %}
+                <a href="?page={{ items.next_page_number }}" class="px-4 py-2 bg-blue-200 text-blue-700 rounded-lg hover:bg-blue-300 transition-colors duration-200 ease-in-out">Next</a>
+                <a href="?page={{ items.paginator.num_pages }}" class="px-4 py-2 bg-blue-200 text-blue-700 rounded-lg hover:bg-blue-300 transition-colors duration-200 ease-in-out">Last &raquo;</a>
+              {% endif %}
+            </span>
+          </div>
+        {% endif %}
       </div>
     </div>
   </div>
 
-  <script>
+  <script type="module" src="{% static 'chart.js/dist/chart.umd.js' %}"></script>
+  <script type="module" src="{% static 'chartjs-plugin-zoom/dist/chartjs-plugin-zoom.min.js' %}"></script>
+  {{ illness_data|json_script:'illness_data' }}
+  <script type="module">
+    const illness_data = JSON.parse(document.getElementById('illness_data').textContent)
+    
+    const illness_chart = document.getElementById('illness_chart')
+    let labels = []
+    let counts = []
+    
+    if (illness_data) {
+      for (const [illness, count] of Object.entries(illness_data)) {
+        labels.push(illness)
+        counts.push(count)
+      }
+    }
+    
+    window.myChart = new Chart(illness_chart.getContext('2d'), {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Cases',
+            data: counts,
+            backgroundColor: [
+              'rgba(54, 162, 235, 0.6)', // Light Blue
+              'rgba(255, 99, 132, 0.6)', // Soft Red
+              'rgba(255, 206, 86, 0.6)', // Soft Yellow
+              'rgba(75, 192, 192, 0.6)', // Mint Green
+              'rgba(153, 102, 255, 0.6)', // Light Purple
+              'rgba(255, 159, 64, 0.6)', // Soft Orange
+              'rgba(233, 30, 99, 0.6)' // Soft Pink
+            ],
+            borderColor: [
+              'rgba(54, 162, 235, 1)', // Light Blue
+              'rgba(255, 99, 132, 1)', // Soft Red
+              'rgba(255, 206, 86, 1)', // Soft Yellow
+              'rgba(75, 192, 192, 1)', // Mint Green
+              'rgba(153, 102, 255, 1)', // Light Purple
+              'rgba(255, 159, 64, 1)', // Soft Orange
+              'rgba(233, 30, 99, 1)' // Soft Pink
+            ],
+            borderWidth: 1,
+            borderRadius: 5, // Rounded corners
+            barThickness: 30, // Adjust the width of the bars
+            categoryPercentage: 0.8, // Adjust spacing between bars
+            barPercentage: 0.9 // Adjust spacing between categories
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true, // Allows the chart to fill the parent container
+        scales: {
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: 'rgba(200, 200, 200, 0.3)', // Lighter grid lines
+              lineWidth: 1
+            },
+            title: {
+              display: true,
+              text: 'Number of Cases',
+              font: {
+                size: 16,
+                weight: 'bold'
+              },
+              color: '#333'
+            }
+          },
+          x: {
+            grid: {
+              display: false // No grid lines for x-axis
+            },
+            title: {
+              display: true,
+              text: 'Categories',
+              font: {
+                size: 16,
+                weight: 'bold'
+              },
+              color: '#333'
+            },
+            ticks: {
+              autoSkip: true, // Automatically skip labels when there are too many
+              maxTicksLimit: 10, // Maximum number of labels to show
+              maxRotation: 90 // Maximum rotation angle for labels
+            }
+          }
+        },
+        plugins: {
+          zoom: {
+            pan: {
+              enabled: true,
+              scaledMode: 'x'
+            },
+            limits: {
+              x: {
+                min: 0
+              }
+            },
+            zoom: {
+              wheel: {
+                enabled: true,
+                speed: 0.001
+              },
+              drag: {
+                enabled: true,
+                threshold: 100
+              },
+              pinch: {
+                enabled: true
+              },
+              mode: 'x'
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function (tooltipItem) {
+                return `${tooltipItem.dataset.label}: ${tooltipItem.raw}` // Custom tooltip text
+              }
+            },
+            backgroundColor: 'rgba(0, 0, 0, 0.9)', // Darker tooltip background
+            titleColor: '#fff', // Tooltip title color
+            bodyColor: '#fff' // Tooltip body color
+          },
+          legend: {
+            display: false,
+            position: 'top', // Position of the legend
+            labels: {
+              boxWidth: 20,
+              font: {
+                size: 14,
+                weight: 'bold'
+              },
+              color: '#333'
+            }
+          }
+        }
+      }
+    })
+    
     let allPatientBtn = document.querySelector('.all-patient-btn')
     let monthlyPatientBtn = document.querySelector('.monthly-patient-btn')
     let todayPatientBtn = document.querySelector('.today-patient-btn')
@@ -124,9 +275,7 @@
         })
     }
     function dataHandler(data) {
-      document.querySelector('.patient-count').innerHTML = `
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          Total Patient(s): ${data.patient_count}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          `
+      document.querySelector('.patient-count').innerHTML = ` Total Patient(s): ${data.patient_count}`
     }
     
     function requestHandler(data) {

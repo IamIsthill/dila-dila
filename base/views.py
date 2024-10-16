@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from patients.models import Patient
+from records.models import Illness, Records
 from medicine_request.models import Request
 from django.contrib.auth.decorators import login_required
 from rest_framework.decorators import api_view
@@ -9,11 +10,36 @@ from datetime import datetime
 from django.db.models import Sum
 from django.contrib import messages
 import logging
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 
 logger = logging.getLogger('__name__')
 
 @login_required(login_url='login')
 def home(request):
+    record_list = Records.objects.all()
+
+    illness_data = {}
+
+    if record_list:
+        for record in record_list:
+            illness_name = record.illness.illness_name
+            if illness_name not in illness_data:
+                illness_data[illness_name] = 1
+            else:
+                illness_data[illness_name] += 1
+    
+    paginator = Paginator(record_list, 5)
+    page = request.GET.get('page')
+    try:
+        items = paginator.page(page)
+    except PageNotAnInteger:
+        items = paginator.page(1)
+    except EmptyPage:
+        items = paginator.page(paginator.num_pages)
+
+
+
     patients = Patient.objects.all()
     patient_count = patients.count()
     request_count = Request.objects.count()
@@ -26,7 +52,7 @@ def home(request):
     quantity = Request.objects.filter(date_fulfilled__isnull=False).aggregate(quantity=Sum('quantity'))['quantity']
     if quantity == None:
         quantity = 0
-    context = {'patient_count' : patient_count, 'request_count': request_count, 'fulfilled_count': fulfilled_count, 'unfulfilled_count': unfulfilled_count, 'quantity':quantity, }
+    context = {'patient_count' : patient_count, 'request_count': request_count, 'fulfilled_count': fulfilled_count, 'unfulfilled_count': unfulfilled_count, 'quantity':quantity, 'illness_data':illness_data, 'items':items}
     return render(request, 'base/index.html', context)
 
 @api_view(['GET'])

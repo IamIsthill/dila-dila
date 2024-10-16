@@ -7,6 +7,17 @@
       <p class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">{{ record.patient.first_name }} {{ record.patient.last_name }}</p>
     </div>
     <div class="mb-4">
+      <label for="id_DOB" class="block text-sm font-medium text-gray-700">Illness:</label>
+      <input type="text" name="illness" required id="id_DOB" value="{{ record.illness.illness_name }}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" list="illness_list" />
+      <datalist id="illness_list">
+        {% if illness_list %}
+          {% for illness in illness_list %}
+            <option value="{{ illness.illness_name }}"></option>
+          {% endfor %}
+        {% endif %}
+      </datalist>
+    </div>
+    <div class="mb-4">
       <label for="id_DOB" class="block text-sm font-medium text-gray-700">Check up Details:</label>
       <textarea type="textarea" name="checkup" required id="id_DOB" class="h-24 mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">{{ record.checkup_details }}</textarea>
     </div>
