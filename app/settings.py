@@ -179,10 +179,15 @@ if not DEBUG:
         'http://local-hrms.duckdns.org', 
         'https://local-hrms.duckdns.org',
         '35.197.90.138',
+        '127.0.0.1:8000',
+        '127.0.0.1',
+        'http://127.0.0.1:8000',
+        'http://127.0.0.1',
     ]
     CSRF_TRUSTED_ORIGINS = [
         'https://local-hrms.duckdns.org',
-        'http://local-hrms.duckdns.org'
+        'http://local-hrms.duckdns.org',
+        'http://127.0.0.1:8000',
     ]
 
 # New config

@@ -12,7 +12,7 @@ class Patient(models.Model):
     DOB = models.DateField(null=False)
     civil_status = models.CharField(max_length=20, null=True)
     birth_place = models.CharField(max_length=100, null=True)
-    contact = models.IntegerField(null=True)
+    contact = models.BigIntegerField(null=True)
     maiden_name = models.CharField(max_length=100, null=True)
 
     address = models.CharField(max_length=255)
