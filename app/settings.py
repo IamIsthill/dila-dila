@@ -178,7 +178,7 @@ if not DEBUG:
         'local-hrms.duckdns.org', 
         'http://local-hrms.duckdns.org', 
         'https://local-hrms.duckdns.org',
-        '35.197.90.138',
+        '34.83.12.245',
         '127.0.0.1:8000',
         '127.0.0.1',
         'http://127.0.0.1:8000',
